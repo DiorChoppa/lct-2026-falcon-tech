@@ -7,7 +7,7 @@
 | Материал | Ссылка |
 |---|---|
 | Онлайн-демо (публичное, без входа) | **https://lct.znatalk.ai** |
-| Презентация | [docs/presentation/reid-lct2026-ru.pdf](docs/presentation/reid-lct2026-ru.pdf) · [.pptx](docs/presentation/reid-lct2026-ru.pptx) |
+| Презентация | [docs/presentation/reid-lct2026.pdf](docs/presentation/reid-lct2026.pdf) · [.pptx](docs/presentation/reid-lct2026.pptx) |
 | Пояснительная записка (PDF) | [docs/Пояснительная_записка.pdf](docs/Пояснительная_записка.pdf) |
 | Полная проверка и ограничения | [docs/submission-readiness.md](docs/submission-readiness.md) |
 
