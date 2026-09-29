@@ -1,0 +1,77 @@
+[
+    {
+        "Id": "sha256:099f42bf4f21998be21592cbee536c8b28a6488dc2fc7a47566c381042a1ec6a",
+        "RepoTags": [
+            "reid-submit:latest"
+        ],
+        "RepoDigests": [
+            "reid-submit@sha256:099f42bf4f21998be21592cbee536c8b28a6488dc2fc7a47566c381042a1ec6a"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-09-29T09:09:17.885652304Z",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305",
+                "PYTHON_VERSION=3.12.12",
+                "PYTHON_SHA256=fb85a13414b028c49ba18bbd523c2d055a30b56b18b92ce454ea2c51edc656c4",
+                "HF_HUB_OFFLINE=1",
+                "TRANSFORMERS_OFFLINE=1",
+                "PYTHONUNBUFFERED=1",
+                "PYTHONPATH=/opt/lct/python",
+                "LCT_REQUIRE_CUDA=1",
+                "CUDA_DISABLE_PTX_JIT=1"
+            ],
+            "Entrypoint": [
+                "python",
+                "/opt/lct/submit.py"
+            ],
+            "WorkingDir": "/work"
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 6928546638,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:9eb9a78eeb101ab215acf43ffb2a709d5fca9ca2a22178564c7ee5cc30774c60",
+                "sha256:9a0912b10e7336b5032c96abfaaad92f0fba6c03cbb315ea5f9ff37442520911",
+                "sha256:78a4eeeff9630145665d0439c75b49eb0fb4ae92de07a5fa541365d8587ac5aa",
+                "sha256:1f6b48d1b8f31d448ca0c4f981b51eaec48e38809d015e7d941534aa12c452b6",
+                "sha256:e904d4988b1e267758ee246e6885c9f92c0d14ad374fa2eb06c1e0e790ce65d5",
+                "sha256:fc3703845c05aac5f56cfa5a6142169e92bf25b19ac5958a3949418c828f87c1",
+                "sha256:8023a51265ebcd17adf392d56590aff2cc7d9064f08a2613d3c7fe0d23a2e718",
+                "sha256:977cadc17bb119fc4f01e144d59501205136e25134dbad2c7e2ff99f2c604953",
+                "sha256:16fc1e052391292551382e834a02431f31c59faa651545a8d7e5129b8a777e13",
+                "sha256:6aaf2c65c968bf62a652abab95a4eba2b1fa1db843ada2b9b5427e11e8c00e46",
+                "sha256:e0e0376efaafe81c8c9d434a280bce9742dbbc90c9fe33c6a6c4dea2a0d515eb",
+                "sha256:900ee5d00b4df7cf4ccbdc9448bfb41d4bc11bb9b02f5c84dde8fc5f3b489485",
+                "sha256:fd597158f3b2a5580341720d6fee0e6da8298c426ce29e71c3790f8bb4d604a6",
+                "sha256:4ce81830ee3cc51fe93c282a429fc406ab14f08fdcaec1b13bc0e8b5cfe255cc",
+                "sha256:a71a8cfff56b5757e3adeed65e53f75e5d5341065edd0bedbbe9764e347c3045",
+                "sha256:ba47c90a98bd625ee40eda6ec93d5c431a728c8bb0638986ae0efb84cf7bb91a",
+                "sha256:e0d5b6139607d362c9de4747a8ea930eea559165c99d144af6c55cf7f20c7a12",
+                "sha256:9cca30688676c5be368ee2c3ca8b30ad962437e8305578b4f5f26644a2107612",
+                "sha256:ac0da8ea110a966945ed7e5ff0a1042bb5b40a2ccf44b8981eb90f9f11b6d60f",
+                "sha256:a197050aff267329ff2da500018ada42bfcaf80999e25749f857827e451842b8"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-09-29T09:57:07.401350461Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:099f42bf4f21998be21592cbee536c8b28a6488dc2fc7a47566c381042a1ec6a",
+            "size": 856
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "rzbaipomivknvq4sh7wgla43o",
+                    "CreatedAt": "2026-09-29T09:57:07.424962294Z"
+                }
+            ]
+        }
+    }
+]

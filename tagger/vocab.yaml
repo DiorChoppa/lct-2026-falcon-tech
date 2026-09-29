@@ -1,0 +1,15 @@
+# Словарь деталей для zero-shot тегов. Ключ — то, что уходит в БД и UI,
+# prompts — текстовые запросы детектору. Держим только детали, которые
+# детектор ловит стабильно (проверка на 100 кропах, см. план).
+tags:
+  roof_box:      { ru: "Багажник на крыше", prompts: ["roof box on car", "roof cargo box"] }
+  roof_rails:    { ru: "Рейлинги",          prompts: ["roof rails on car"] }
+  spoiler:       { ru: "Спойлер",           prompts: ["rear spoiler on car"] }
+  sticker:       { ru: "Наклейка/надпись",  prompts: ["sticker on car", "text decal on car"] }
+  tow_hitch:     { ru: "Фаркоп",            prompts: ["tow hitch on car"] }
+  damage:        { ru: "Повреждение",       prompts: ["dent on car body", "scratched car body", "broken bumper"] }
+  tinted:        { ru: "Тонировка",         prompts: ["dark tinted car windows"] }
+  alloy_wheels:  { ru: "Литые диски",       prompts: ["alloy wheel rim"] }
+  taxi_sign:     { ru: "Шашка такси",       prompts: ["taxi sign on car roof"] }
+  carsharing:    { ru: "Ливрея каршеринга", prompts: ["carsharing livery on car", "car with company branding"] }
+  antenna:       { ru: "Антенна",           prompts: ["antenna on car roof"] }

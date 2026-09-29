@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "date": "2026-09-29",
+  "review_base": "6ff7be6",
+  "runtime_release": "d176cd0",
+  "python_tests": {
+    "passed": 48,
+    "failed": 0,
+    "skipped": 0
+  },
+  "ruff": "passed",
+  "calibration_replay": {
+    "dba": {
+      "threshold": 0.720700740814209,
+      "TP": 142,
+      "FP": 0,
+      "FN": 18,
+      "TN": 40,
+      "F1": 0.9403973509933775,
+      "TNR": 1.0,
+      "Q": 0.9582781456953642
+    },
+    "plain": {
+      "threshold": 0.6959864497184753,
+      "TP": 142,
+      "FP": 0,
+      "FN": 18,
+      "TN": 40,
+      "F1": 0.9403973509933775,
+      "TNR": 1.0,
+      "Q": 0.9582781456953642
+    }
+  },
+  "calibration_input_sha256": {
+    "query.csv": "9f14fc566250b5aa980a0c40622ee3ba733875cbc6fec18ff86f014022772179",
+    "gallery.csv": "978fac4e468da6eecb44a43874db7156ede4131457f98ef8c1776c1444e82729",
+    "ground_truth.csv": "f83480bd02c92ce38747bc41b6e1db8df42582d84585c7b8364419929acd8bbc"
+  },
+  "embedding_sha256": "ceee57066aae48653ce3878e3cac25c08f16ebba85ff17a5cc5629a1d4b876ed",
+  "tool_sha256": "b9b1944faf128302fd6a774c0562c578581a7a1ba459d405d2e4b2b99f809a3f",
+  "regression_test_sha256": "00b8e88e6f3816a836a1450e77bea942a85821373c03fa83f5faccee12ff2bd3",
+  "immutable_bindings_sha256": {
+    "models/model.onnx": "a1a63bcbfc00388ad6612a33c4861ffae8684a67bb3c0f1cb0d380b0b4bec1e0",
+    "models/model.json": "1015c336d068563fad87d7a1d368a938094a2067652cf25e80b29ce80dfd1695",
+    "models/policy.json": "f43c01750b27396dcba069413a3ef50f067875e28927f42713d71cc3e44e6adc",
+    "submission/submission.csv": "e6a2afaf351d8d307e2773114ed7baa5b568f0d9c094fca8f95334d87912eb7b",
+    "submission/candidates.csv": "d6db96b28081799e71f03797ba53feedae6c15704f6b88bd1ec099f002e51d8e",
+    "submission/embeddings.npy": "e1f5b45908c6eb326fb70ed853eb414411bbdb41262b783cf286a2dca4afcfd1",
+    "ml/organizers/evaluate.py": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3"
+  },
+  "baked_runtime_inputs_unchanged": true,
+  "new_relative_links_checked": 21,
+  "largest_changed_source": "ml/inference/rust/src/lib.rs",
+  "largest_changed_source_lines": 916,
+  "scope": "No model, threshold or audit-driven change",
+  "regression_evidence": {
+    "float32_boundary": {
+      "before": 0.8999999761581422,
+      "after": 0.9000000357627869,
+      "accepted_before_float32_load": 0,
+      "accepted_after_float32_load_before_fix": 1,
+      "accepted_after_float32_load_after_fix": 0
+    },
+    "stale_candidate_score": {
+      "candidate_score_shift": 0.01,
+      "old_dba_threshold": 0.730700740814209,
+      "repaired_dba_threshold": 0.720700740814209,
+      "repaired_plain_threshold": 0.6959864497184753
+    },
+    "scope": "Copied calibration artifacts only; frozen production artifacts unchanged"
+  }
+}

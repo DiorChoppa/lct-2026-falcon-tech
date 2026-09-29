@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-09-29T08:46:30.564755+00:00",
+  "event": "final_submission_tt_reproduction_complete",
+  "run": "vitl_tt_reproduce_20260929_s20260920",
+  "epochs": 8,
+  "steps": 2864,
+  "mAP@10": 0.9121270368612561,
+  "historical_mAP@10": 0.9195635909402521,
+  "delta_pp": -0.7436554078996016,
+  "Q": 0.9658536585365853,
+  "peak_temperature_c": 76.0,
+  "scope": "Fresh FIT fine-tuning from verified retained external TT parent; not a full external/foundation retrain",
+  "next": "Qualify original 91.956% checkpoint for ONNX/native CUDA; no audit-role selection"
+}

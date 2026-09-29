@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "query_rows": 1110,
+  "gallery_rows": 750,
+  "embedding_shape": [
+    1860,
+    1024
+  ],
+  "dtype": "float32",
+  "maximum_norm_error": 9.754216767632329e-08,
+  "all_rankings_match_native_reference": true,
+  "accepted_queries": 1025,
+  "refused_queries": 85,
+  "threshold": 0.6538920402526855,
+  "maximum_confidence_error": 7.927284241260324e-07,
+  "sha256": {
+    "submission.csv": "0ba4e204d609c194e333e83e11a10d76b1c94d99da708bd80412e8747864ce82",
+    "candidates.csv": "3b17729a0f779025170991b0c10cf2f1dae2bcc4f43031828ab450d60753836b",
+    "embeddings.npy": "49b894f0401f534da6aec183f1d77b937ed5dd1c233d7276a8857a179d98ceef"
+  },
+  "input_sha256": {
+    "query": "97e1ed21942bae9c95b1ce2e5d339d9f635bf49fa484367e6b19349789bb9b4c",
+    "gallery": "a64ed21fa39bbfd8c7a172468d043415800500b6ed695cdb8162188cf9005496",
+    "manifest": "daed979f5b62b203d368af9e5eef496e5f928b43cec17dd44411fa49833cd660"
+  }
+}

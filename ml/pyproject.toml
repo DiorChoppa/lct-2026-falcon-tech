@@ -1,0 +1,33 @@
+[project]
+name = "reid-ml"
+version = "0.1.0"
+description = "Обучение, экспорт ONNX, валидация и подбор порога"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "pillow>=10",
+    "pyyaml>=6",
+    "scikit-learn>=1.5",
+    "tqdm>=4",
+    # PyTorch ставится под конкретную CUDA отдельно, см. README:
+    # "torch", "torchvision", "timm", "onnx", "onnxruntime"
+]
+
+[dependency-groups]
+dev = ["ruff>=0.6", "pytest>=8", "jupyter>=1"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+# Native sources and the separate container launcher are checked separately.
+extend-exclude = ["inference", "deployment"]
+
+[tool.ruff.lint.per-file-ignores]
+# Byte-identical historical sources: the shipped training/export run pinned their SHA-256.
+"train/{reid_model,checkpoint_inference,residual}.py" = ["I001"]
+"train/data/fit_v8/prepare.py" = ["I001"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

@@ -1,0 +1,17 @@
+# Overlay: образы из registry вместо сборки на ВМ (веса запечены в образ inference).
+#   REGISTRY=cr.yandex/<registry-id>/reid docker compose -f docker-compose.yml \
+#       -f deploy/vm/docker-compose.registry.yml up -d
+# Публикация образов: just push-images REGISTRY=…
+services:
+  inference:
+    image: ${REGISTRY}/inference:${TAG:-latest}
+  gallery:
+    image: ${REGISTRY}/gallery:${TAG:-latest}
+  search:
+    image: ${REGISTRY}/search:${TAG:-latest}
+  tagger:
+    image: ${REGISTRY}/tagger:${TAG:-latest}
+  api:
+    image: ${REGISTRY}/api-gateway:${TAG:-latest}
+  web:
+    image: ${REGISTRY}/web:${TAG:-latest}

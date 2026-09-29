@@ -1,0 +1,99 @@
+{
+  "version": 8,
+  "status": "STAGED_PENDING_INDEPENDENT_REVIEW_NOT_ACTIVE",
+  "parent_csv_sha256": "75425adee5a118e3853f47cef8a53572d4079be93a7e2a41b6771f9d750ea4c9",
+  "parent_manifest_sha256": "f11e5c1fcb9ef7cbd62fb00f2985c90f5ff26c02ae233fd5d216d290dc71e111",
+  "source_csv_sha256": "bd1df45b052ae9aabb7fd356898e244875f8cad2f111a3f76977c1b90bce9268",
+  "csv_sha256": "fe1394a9fbc7ba5e21eeed802252d373348940ebece6d0ae5a6c4727215ff962",
+  "exclusion_key_fields": [
+    "image_id",
+    "x",
+    "y",
+    "w",
+    "h",
+    "vehicle_id",
+    "camera_id"
+  ],
+  "exclusions": [
+    {
+      "row": {
+        "image_id": "2223367bff1d4237a34212ee3df0f0df",
+        "x": "728",
+        "y": "627",
+        "w": "753",
+        "h": "453",
+        "vehicle_id": "967",
+        "camera_id": "90"
+      },
+      "source_csv_line_including_header": 8009,
+      "parent_fit_csv_line_including_header": 4829,
+      "context": "artifacts/fit_eda_round7/contexts/source_row_8009.jpg",
+      "context_sha256": "2d9ed466b55a0a104df39cf6e2c743d4131ce582725a70c7c0a6d9067cd9ccf6"
+    },
+    {
+      "row": {
+        "image_id": "8f28abd7a6104e9d84068eb01ea04363",
+        "x": "728",
+        "y": "625",
+        "w": "753",
+        "h": "455",
+        "vehicle_id": "967",
+        "camera_id": "90"
+      },
+      "source_csv_line_including_header": 8012,
+      "parent_fit_csv_line_including_header": 4832,
+      "context": "artifacts/fit_eda_round7/contexts/source_row_8012.jpg",
+      "context_sha256": "289fa7180ed9f99ccccc8a902bbc3280c2c11d64c4547eba93b8f9739320bafb"
+    }
+  ],
+  "evidence_pins": {
+    "artifacts/training_filters/v7/train.csv": "75425adee5a118e3853f47cef8a53572d4079be93a7e2a41b6771f9d750ea4c9",
+    "artifacts/training_filters/v7/manifest.json": "f11e5c1fcb9ef7cbd62fb00f2985c90f5ff26c02ae233fd5d216d290dc71e111",
+    "Data/dataset/train.csv": "bd1df45b052ae9aabb7fd356898e244875f8cad2f111a3f76977c1b90bce9268",
+    "artifacts/fit_eda_round7/selection.json": "8b3aa85d2deb07c1e4dc4c5d9d24910ffa0efa243bc9d7236deadc4b7047badb",
+    "artifacts/fit_eda_round7/final_review.json": "d8bb7781ace8ffd4b59eaca3639391a65372a9ed769c0318275af3d95da940d3",
+    "artifacts/fit_eda_round7/root_visual_review.json": "04f6ae9c11ba28293cf9fb1b9025364a5f52b352507f9bec19a5bc0f0b9c45ba",
+    "artifacts/fit_eda_round7/sheets/identity_967.jpg": "c2322f5944e9afad01597e9d1ed442cb707ca858c40defc7da586e125ebf7598",
+    "artifacts/fit_eda_round7/contexts/source_row_8009.jpg": "2d9ed466b55a0a104df39cf6e2c743d4131ce582725a70c7c0a6d9067cd9ccf6",
+    "artifacts/fit_eda_round7/contexts/source_row_8012.jpg": "289fa7180ed9f99ccccc8a902bbc3280c2c11d64c4547eba93b8f9739320bafb",
+    "artifacts/fit_eda_round7/contexts/source_row_8010.jpg": "98855dd57e007ad046cb5e42655dbe74d863919c08eac9af5566998d920b6748",
+    "artifacts/training_filters/v8/prepare.py": "743b514d489d3f8ac5c4c863362d849d6df220b92697e5f12bdc679d664b8e56",
+    "artifacts/episodes/v1/train.csv": "e900f4cda82a0532e407b371bde180d2aa466677bf8e87548bee82305806f434",
+    "artifacts/training_filters/v2/first_use.json": "def00f35486bd120dfa3be1f58ed85c5f0538be71e4bee1f7c07134c7d1daf8b",
+    "artifacts/training_filters/v2/manifest.json": "a11cf367cce67f9e75944b5f24df24ec429afbaa68b916ad8ffd00f2cb0528f3",
+    "artifacts/training_filters/v3/manifest.json": "282d9f6808be055740511f09655605c445430ac0fdf720607886682a3db48677",
+    "artifacts/training_filters/v4/manifest.json": "4d91dc66f68d941d2393727eae5224742c6e9b74b26fe6e9c8ddd1284bb64f53",
+    "artifacts/training_filters/v5/manifest.json": "a403ffb7a44821276dedeb6ba5ae8a0d905c1c537a91dab11e8aee775589aead",
+    "artifacts/training_filters/v6/manifest.json": "38e8bd9b5d9b6140f09e01210638df0c2096f8b7a65e3d7759b65d9d1ecf4a07"
+  },
+  "before": {
+    "images": 5724,
+    "identities": 928,
+    "cameras": 96
+  },
+  "after": {
+    "images": 5722,
+    "identities": 928,
+    "cameras": 96
+  },
+  "affected_identities_remaining": {
+    "967": {
+      "rows": 4,
+      "cameras": {
+        "89": 3,
+        "90": 1
+      }
+    }
+  },
+  "retained_hard_or_ambiguous_source_rows": [
+    8010
+  ],
+  "inherited_original_FIT_exclusions": 22,
+  "cumulative_original_FIT_exclusions": 24,
+  "inherited_quarantines": "Exact subset of v7; every prior omission remains absent, including pre-FIT quarantines. No role assignments, source rows or labels changed.",
+  "batch32_steps_per_epoch": 179,
+  "e12_updates": 2148,
+  "reason": "Two independently viewed displaced target bboxes. No plate basis, no invented replacement bbox, no relabeling.",
+  "activation": "None: campaign, STATE and trainer unchanged. Existing checkpoints remain FIT-v7.",
+  "split_roles": "Only delete two observations within FIT; retain exact identity/camera sets. No protected-role files opened."
+}

@@ -1,0 +1,234 @@
+{
+  "model": {
+    "name": "vitl16_dinov3_veriwild_tt_2plus2_fitv8",
+    "version": "1.2.0-final",
+    "file": "model.onnx",
+    "sha256": "a1a63bcbfc00388ad6612a33c4861ffae8684a67bb3c0f1cb0d380b0b4bec1e0",
+    "input_name": "images",
+    "output_name": "embeddings",
+    "input_height": 256,
+    "input_width": 256,
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "resize": "bicubic",
+    "dim": 1024,
+    "l2_normalized": true,
+    "threshold": 0.6959864497184753,
+    "threshold_status": "frozen_calibration_v1_calibration_episode_Q_argmax",
+    "alpha": 1.0,
+    "provenance": "ml/MODEL_GUIDE.md",
+    "retrieval": {
+      "method": "gallery_dba",
+      "k": 4,
+      "alpha": 2,
+      "threshold": 0.720700740814209,
+      "threshold_status": "frozen_calibration_v1_calibration_episode_Q_argmax"
+    }
+  },
+  "model_bytes": 607325498,
+  "model_manifest_sha256": "1015c336d068563fad87d7a1d368a938094a2067652cf25e80b29ce80dfd1695",
+  "policy_sha256": "f43c01750b27396dcba069413a3ef50f067875e28927f42713d71cc3e44e6adc",
+  "image": "sha256:099f42bf4f21998be21592cbee536c8b28a6488dc2fc7a47566c381042a1ec6a",
+  "quality": {
+    "search": {
+      "mAP@10": 0.9200480870642831,
+      "Rank-1": 0.9127906976744186,
+      "Rank-5": 0.9593023255813954,
+      "TP": 148,
+      "FP": 0,
+      "FN": 24,
+      "TN": 43,
+      "F1": 0.9249999999999999,
+      "TNR": 1.0,
+      "PR-AUC": 0.9839010619656999,
+      "Q": 0.9475
+    },
+    "calibration": {
+      "mAP@10": 0.8299992087112622,
+      "Rank-1": 0.79375,
+      "Rank-5": 0.91875,
+      "TP": 142,
+      "FP": 0,
+      "FN": 18,
+      "TN": 40,
+      "F1": 0.9403973509933775,
+      "TNR": 1.0,
+      "PR-AUC": 0.9850571609175808,
+      "Q": 0.9582781456953642
+    },
+    "audit": {
+      "mAP@10": 0.8700329861111111,
+      "Rank-1": 0.875,
+      "Rank-5": 0.93125,
+      "TP": 141,
+      "FP": 2,
+      "FN": 19,
+      "TN": 38,
+      "F1": 0.9306930693069307,
+      "TNR": 0.95,
+      "PR-AUC": 0.9838781454329008,
+      "Q": 0.9364851485148515
+    }
+  },
+  "audit_uncertainty": {
+    "repetitions": 5000,
+    "seed": 20260929,
+    "known_identities": 158,
+    "method": "Known identity cluster resampling; normalize to 160 known and independently resample 40 unknown queries.",
+    "mAP@10_95pct": [
+      0.8231558101227914,
+      0.9113888789845092
+    ],
+    "Q_95pct": [
+      0.9003212590230362,
+      0.9655737704918033
+    ],
+    "limitation": "Conditional interval on a previously opened audit fold, not selection-adjusted hidden-test uncertainty."
+  },
+  "runtime_risk": "535/A5000 not available. Local CUDA with PTX JIT disabled passes; it does not emulate the jury driver.",
+  "demo": "https://lct.znatalk.ai \u2014 team will restore availability",
+  "evidence_sha256": {
+    "tt-input-audit.json": "2748dbb61dd850f2096f84905746179b69ba3f03c5037626c44b34e7252a3c48",
+    "tt-reproduction-summary.json": "c703f72a301f88923a009d5f307a23045752f2e5f9f5f16c595b9ea3f4767717",
+    "tt-portable-input-check.json": "4eeab93562e5d3590b802c8b62e5fb2c7ba3a2e5be89a3fc4e8e1b2f8c5fff2c",
+    "candidate-selection.json": "5487cc290a2aec101da2c29853caccf94d4694801e237076719d9c63ae65754b",
+    "threshold-freeze.json": "fd7fc023c07ec6d7a3757fd924c8eb0e93ce0f83bd9823c579869756e17b0f8a",
+    "portable-calibration-replay.json": "4496ee3f316d80f2716cfe963215a9cd573ba97de081924cd99e58a217ee10db",
+    "placement-report.json": "cda37b49b184cb0c082e3c8f720b2afcd002130015b3863674378c162a93c2d0",
+    "policy-audit.json": "57a954b6675076559aa2819a8a24d1d077510df8ff74ca3f57727e610c472f49",
+    "submit-image-receipt.json": "396ffa4e071cdacbed75503bf0b9905e46cd017e486cc4956d0d2453c8806028",
+    "perf-receipt.json": "7d90a057ee1f91d372896d8775e35caf7ff1019ec43936b777ec0c1e592d20e3",
+    "query-independence.json": "e6d25c0cab516f9b6d003d65d1937baa04433bac209242a136855c2844f84e06",
+    "error-example.json": "71aaea7752d4675063fb4836af0d54e2581993c636226ae1bc7bad840d933505",
+    "search-replay.json": "ac8f2bbea4ed7720480510eb931b85db5e598adc451f52f5281c35562e9b0d0a",
+    "tt-plate-control.json": "995bc2ef21dcbe7b8dbe6892b8e635766b2559f1ff6b83f8655030202f69a1f2",
+    "native.json": "da51306db6d9a506377b6b9c01496fb535af17bf34a782a322084fb503affc92",
+    "python.json": "6126f518cc290214e676072b9bf42bfea2f7a44afd0846f9c1e9aa550c489ad3",
+    "python-repeat.json": "21c015578b8fcdf342ddb54f89fb06f202d6c9d4a1f844aad2c0b4d28ed060d1",
+    "submission-check.json": "409aabc8bcfc2ed90ac1d94a4c0326e7a22f465f2c95bccc14775ffe0ff80caa",
+    "image.json": "1f9305c2868be9f9bb6a7e61868101bc929631c30fd81fa8c81dc3e36ea6da8a",
+    "gpu.txt": "d4870b4c7d8fbf82911696a7daeecf184f9943923e32d73e82cfffe221c9b459"
+  },
+  "presentation_sha256": "b2d278cbd5519f9e2d1eb0274de97ffb7db50986f41a770147f15904e58090a5",
+  "final_protected_data_check": {
+    "status": "passed",
+    "protected_files": 11428,
+    "changed_files": [],
+    "baseline_sha256": "c47b7eeda1f0300b1d86932b37158ba9f943d312b5d31dbd976c63c5981b5512"
+  },
+  "tests": {
+    "workspace-final-tests": {
+      "passed": 148,
+      "failed": 0,
+      "ignored": 1,
+      "log_sha256": "ce5c5542e8fa2f1096f4f143c692147dd814a5a81f264328e3f95b0077be244c"
+    },
+    "service-parity-final": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "log_sha256": "56ead52afd1905de35be2af6689c01c529c1fe3c57fe73be56f6988d6651244a"
+    },
+    "native-test": {
+      "passed": 28,
+      "failed": 0,
+      "ignored": 2,
+      "log_sha256": "1e83010f6553914ef62032dbe3ff3696e5b794f04859d6bc943d4be940abceb2"
+    },
+    "offline-tests": {
+      "passed": 13,
+      "failed": 0,
+      "ignored": 0,
+      "log_sha256": "446f65018a16634fafca53fb3f113cb419e7540507d0190b03302f7e113697b6"
+    },
+    "python": {
+      "passed": 48,
+      "failed": 0,
+      "skipped": 0,
+      "previous_release_passed": 47,
+      "scope": "Full suite after calibration-tool review; Ruff passed",
+      "evidence": "code-quality-review.json"
+    },
+    "web": {
+      "passed": 81,
+      "failed": 0,
+      "production_build": "passed"
+    },
+    "lint": {
+      "python_ruff": "passed",
+      "rust_fmt": "passed",
+      "rust_clippy_warnings_denied": "passed"
+    },
+    "browser": {
+      "scope": "Local production preview, mock API; final model info, metrics, calibration charts",
+      "runtime_errors": 0,
+      "note": "Does not establish public demo/backend availability."
+    },
+    "presentation": {
+      "slides": 15,
+      "visual_review": "passed after mapping correction",
+      "package_errors": 0,
+      "layout_errors": 0,
+      "inherited_decorative_warnings": 11
+    },
+    "tagger": {
+      "passed": 8,
+      "failed": 0,
+      "ruff": "passed"
+    }
+  },
+  "scanned_weight_files": {
+    "models/model.onnx": 607325498,
+    "crates/inference/tests/fixtures/smoke_model.onnx": 241
+  },
+  "scanned_weight_bytes": 607325739,
+  "image_rebuild_equivalence": {
+    "status": "passed",
+    "measured_staging_image": "sha256:57590960eb7cda058b8b4bb55c6502c73e09a5865476e53c140923b715ed64dc",
+    "submission_folder_image": "sha256:099f42bf4f21998be21592cbee536c8b28a6488dc2fc7a47566c381042a1ec6a",
+    "rootfs_identical": true,
+    "runtime_config_identical": true,
+    "all_three_outputs_identical_across_images": true,
+    "note": "Docker build attestation changed the image index; filesystem layers and runtime config are identical."
+  },
+  "submission_folder_benchmark": {
+    "native_median_ms": 24.5750915,
+    "native_p95_ms": 29.6374619,
+    "native_best_fps": 185.93531880768904,
+    "python_median_ms": 27.65,
+    "python_p95_ms": 34.89221485037888,
+    "python_best_fps": 110.5,
+    "python_repeat_median_ms": 26.18,
+    "python_repeat_p95_ms": 32.267114400292485,
+    "guard": {
+      "command": [
+        "C:/Users/serge/Data/Projects/LCT_2026/artifacts/final_submission_20260929/tools/just/just.exe",
+        "perf-gpu",
+        "reid-submit",
+        "perf-gpu",
+        "lct-final-submission-audit-20260929"
+      ],
+      "exit_code": 0,
+      "failure": null,
+      "wall_seconds": 205.23399999993853,
+      "peak_temperature_c": 64.0,
+      "peak_gpu_memory_mib": 4702.0,
+      "minimum_free_ram_gib": 15.426456451416016,
+      "minimum_free_disk_gib": 302.68757247924805
+    }
+  },
+  "maintenance_review": {
+    "report": "code-quality-review.json",
+    "model_threshold_runtime_outputs_unchanged": true,
+    "agent_context": "docs/AGENT_CONTEXT.md",
+    "index_snapshot": "context-index.json"
+  }
+}

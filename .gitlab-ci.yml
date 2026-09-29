@@ -1,0 +1,57 @@
+stages: [lint, test, build, deploy]
+
+variables:
+  CARGO_HOME: $CI_PROJECT_DIR/.cargo
+  # models/model.onnx (607 МБ) в Git LFS не нужен ни одному job: тест паритета
+  # #[ignore], а deploy сам забирает веса в /srv/lct (deploy/vm/deploy.sh).
+  # Без этого каждый job качает их заново и расходует LFS-трафик GitLab.
+  GIT_LFS_SKIP_SMUDGE: "1"
+
+cache:
+  key: rust
+  paths: [.cargo/, target/]
+
+rust-lint:
+  stage: lint
+  # trixie: inference статически линкует ONNX Runtime (ort, download-binaries),
+  # пребилд требует glibc/libstdc++ новее bookworm — см. deploy/rust.Dockerfile.
+  image: rust:1.92-trixie
+  script:
+    - rustup component add rustfmt clippy
+    - cargo fmt --all -- --check
+    - cargo clippy --workspace --all-targets -- -D warnings
+
+rust-test:
+  stage: test
+  image: rust:1.92-trixie
+  # Живая БД не нужна: api-gateway в БД не ходит, gallery/search тестируются на моках.
+  script:
+    - cargo test --workspace
+
+python-lint:
+  stage: lint
+  image: ghcr.io/astral-sh/uv:python3.12-bookworm-slim
+  script:
+    - cd ml && uv sync --group dev && uv run ruff check .
+    - cd ../tagger && uv sync --group dev && uv run ruff check .
+
+web-build:
+  stage: build
+  image: node:22-alpine
+  script:
+    - cd web && (npm ci || npm install) && npm run build
+
+deploy:
+  stage: deploy
+  # gitlab-runner на демо-ВМ (shell executor, тег lct-vm, deploy/vm/setup.sh). Скрипт берётся
+  # из этого коммита, код и веса он сам забирает в /srv/lct по CI_JOB_TOKEN. Заменяет
+  # прежний docker-build: те же образы собираются здесь, плюс запуск и /api/health.
+  tags: [lct-vm]
+  resource_group: vm
+  environment:
+    name: production
+    url: https://lct.znatalk.ai
+  script:
+    - bash deploy/vm/deploy.sh
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"

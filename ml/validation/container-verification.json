@@ -1,0 +1,97 @@
+{
+  "model": "vitl16_dinov3_veriwild_tt_2plus2_fitv8",
+  "version": "1.2.0-final",
+  "graph_sha256": "a1a63bcbfc00388ad6612a33c4861ffae8684a67bb3c0f1cb0d380b0b4bec1e0",
+  "manifest_sha256": "1015c336d068563fad87d7a1d368a938094a2067652cf25e80b29ce80dfd1695",
+  "policy_sha256": "f43c01750b27396dcba069413a3ef50f067875e28927f42713d71cc3e44e6adc",
+  "image": "sha256:099f42bf4f21998be21592cbee536c8b28a6488dc2fc7a47566c381042a1ec6a",
+  "provider": "Linux ONNX Runtime CUDA, native CLI; RTX 3090 driver 616.92",
+  "network": "none",
+  "CUDA_DISABLE_PTX_JIT": "1",
+  "retrieval": {
+    "method": "gallery_dba",
+    "k": 4,
+    "alpha": 2,
+    "threshold": 0.720700740814209,
+    "threshold_status": "frozen_calibration_v1_calibration_episode_Q_argmax"
+  },
+  "n_query": 1110,
+  "n_gallery": 750,
+  "shape": [
+    1860,
+    1024
+  ],
+  "dtype": "float32",
+  "independent_verifier": "ml/validation/final_20260929/submission-folder-submission-check.json",
+  "repeat_all_three_files_byte_identical": true,
+  "file_sha256": {
+    "submission.csv": "e6a2afaf351d8d307e2773114ed7baa5b568f0d9c094fca8f95334d87912eb7b",
+    "candidates.csv": "d6db96b28081799e71f03797ba53feedae6c15704f6b88bd1ec099f002e51d8e",
+    "embeddings.npy": "e1f5b45908c6eb326fb70ed853eb414411bbdb41262b783cf286a2dca4afcfd1"
+  },
+  "quality": "Unlabelled public inputs; no jury quality score is inferred.",
+  "placement": {
+    "ort_version": "1.24.4",
+    "providers": [
+      "CUDAExecutionProvider",
+      "CPUExecutionProvider"
+    ],
+    "cases": {
+      "zero_B1": {
+        "minimum_cosine": 0.9999979774774944,
+        "maximum_component_error": 0.00029365718364715576
+      },
+      "real_FIT_B1": {
+        "minimum_cosine": 0.9999981597750586,
+        "maximum_component_error": 0.0001945685944519937
+      },
+      "real_FIT_B17": {
+        "minimum_cosine": 0.9999971717862466,
+        "maximum_component_error": 0.00030694901943206787
+      }
+    },
+    "profile": "placement-profile_2026-09-29_08-48-02.json",
+    "model_sha256": "a1a63bcbfc00388ad6612a33c4861ffae8684a67bb3c0f1cb0d380b0b4bec1e0",
+    "optimized_graph_sha256": "3e7c54009c29a3b33dbf419c75957b2fa2027af77c02140f4b947558d20178f8",
+    "profile_sha256": "2cd2b8434a37ad6aad5151cea87ecba56600e9cc1d7b46c0810fa05d923fc0a0",
+    "native_runtime_sha256": "b10825f4306b01a4951c528554f2495c4597080c63637b300669544d9c142e76",
+    "numeric_pass": true
+  },
+  "query_independence": {
+    "status": "passed",
+    "scope": "33 public queries, reverse ordering, first-query singleton; fixed 50-image gallery",
+    "comparisons": {
+      "reverse": {
+        "queries": 33,
+        "bit_exact_query_vectors": 31,
+        "minimum_cosine": 0.999998388424703,
+        "maximum_component_error": 0.0002439543604850769,
+        "maximum_confidence_error": 1.5497207641601562e-05,
+        "rankings_and_refusals_identical": true,
+        "gallery_bit_exact": true
+      },
+      "single": {
+        "queries": 1,
+        "bit_exact_query_vectors": 0,
+        "minimum_cosine": 0.999998674103478,
+        "maximum_component_error": 0.00016763433814048767,
+        "maximum_confidence_error": 6.9141387939453125e-06,
+        "rankings_and_refusals_identical": true,
+        "gallery_bit_exact": true
+      }
+    },
+    "model_sha256": "a1a63bcbfc00388ad6612a33c4861ffae8684a67bb3c0f1cb0d380b0b4bec1e0",
+    "script_sha256": "b664e654b2188bd74199a8867690cd0abadfbf8ce3c837483ba0b642b634e15b",
+    "note": "Batch-shape FP16 rounding is measured explicitly; no cross-query learning or state."
+  },
+  "repeat_across_rebuilt_images_byte_identical": true,
+  "image_rebuild_equivalence": {
+    "status": "passed",
+    "measured_staging_image": "sha256:57590960eb7cda058b8b4bb55c6502c73e09a5865476e53c140923b715ed64dc",
+    "submission_folder_image": "sha256:099f42bf4f21998be21592cbee536c8b28a6488dc2fc7a47566c381042a1ec6a",
+    "rootfs_identical": true,
+    "runtime_config_identical": true,
+    "all_three_outputs_identical_across_images": true,
+    "note": "Docker build attestation changed the image index; filesystem layers and runtime config are identical."
+  }
+}

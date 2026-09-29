@@ -1,0 +1,21 @@
+[system]
+application_name = "inference"
+production = false
+
+[logger]
+format = "pretty"
+
+[http_server]
+host = "0.0.0.0"
+port = 8081
+
+[grpc_server]
+host = "0.0.0.0"
+port = 50051
+
+[model]
+manifest_path = "models/model.json"
+
+[storage]
+# Must be absolute — see infrastructure::grpc::crop_loader.
+crops_dir = "/tmp/crops"

@@ -1,0 +1,44 @@
+# Overlay публичной ВМ (deploy/vm/README.md): подключается через COMPOSE_FILE в /srv/lct/.env,
+# поэтому `docker compose …` на ВМ (руками, в CI и после перезагрузки) всегда идёт с ним.
+#
+# - caddy: TLS Let's Encrypt для ${DOMAIN}, 80 → 443, проксирует в web (basic auth — в nginx web);
+# - порты остальных сервисов — только на 127.0.0.1: БД с паролем reid/reid и gRPC без
+#   авторизации не должны зависеть от группы безопасности облака;
+# - restart: unless-stopped — стек поднимается сам после перезагрузки ВМ.
+x-restart: &restart
+  restart: unless-stopped
+
+services:
+  db:
+    <<: *restart
+    ports: !override ["127.0.0.1:5432:5432"]
+  inference:
+    <<: *restart
+    ports: !override ["127.0.0.1:50051:50051", "127.0.0.1:8081:8081"]
+  gallery:
+    <<: *restart
+    ports: !override ["127.0.0.1:50054:50054"]
+  search:
+    <<: *restart
+    ports: !override ["127.0.0.1:50053:50053"]
+  tagger:
+    <<: *restart
+    ports: !override ["127.0.0.1:50052:50052"]
+  api:
+    <<: *restart
+    # localhost:8080 — импорт галереи на самой ВМ мимо таймаутов прокси
+    ports: !override ["127.0.0.1:8080:8080"]
+  web:
+    <<: *restart
+    ports: !override ["127.0.0.1:3000:80"]
+
+  caddy:
+    image: caddy:2.10-alpine
+    <<: *restart
+    environment:
+      DOMAIN: ${DOMAIN:?DOMAIN не задан в .env}
+    volumes:
+      - ./deploy/vm/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./data/caddy:/data   # сертификаты и ACME-аккаунт переживают пересоздание контейнера
+    depends_on: [web]
+    ports: ["80:80", "443:443", "443:443/udp"]

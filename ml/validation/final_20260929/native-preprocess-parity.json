@@ -1,0 +1,9 @@
+{
+  "boundary": "file read, JPEG decode, bbox crop, RGB bicubic resize; no normalization or forward",
+  "crop_mismatches": 0,
+  "legacy_median_ms": 9.806199999999999,
+  "normalization": "unchanged arithmetic over byte-identical RGB pixels",
+  "optimized_median_ms": 5.6202,
+  "resize_mismatches": 0,
+  "rows": 11416
+}

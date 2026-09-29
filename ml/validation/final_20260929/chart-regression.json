@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "known_wrong_does_not_reduce_unknown_TNR": {
+    "t": 0.5,
+    "tp": 0,
+    "fp": 1,
+    "fn": 0,
+    "tn": 1,
+    "f1": 0.0,
+    "tnr": 1.0,
+    "score": 0.3
+  },
+  "threshold_full_precision": 0.6959864497184753,
+  "plot_and_matrix_TP": 142
+}

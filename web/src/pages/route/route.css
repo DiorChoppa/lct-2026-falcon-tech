@@ -1,0 +1,677 @@
+/* Экран «Маршрут ТС»: карта слева, панели справа; метки карты — глобальные классы rm-*. */
+.route__head {
+  display: grid;
+  gap: var(--s-1);
+  margin-bottom: var(--s-4);
+}
+
+.route__head h1:focus {
+  outline: none;
+}
+
+.route__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin-bottom: var(--s-2);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.route__back svg {
+  width: 16px;
+  height: 16px;
+}
+
+.sim-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  margin-bottom: var(--s-5);
+  padding: var(--s-3) var(--s-4);
+  border: 1px dashed var(--warn-line);
+  border-radius: var(--radius);
+  background: var(--warn-bg);
+  font-size: 0.9rem;
+}
+
+.sim-banner svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  color: var(--warn);
+}
+
+.route__stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0 0 var(--s-5);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--border);
+}
+
+.route__stat {
+  display: grid;
+  padding: var(--s-3) var(--s-4);
+  background: var(--surface);
+}
+
+.route__stat dt {
+  order: 2;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.route__stat dd {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.route__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(320px, 2fr);
+  gap: var(--s-4);
+  align-items: start;
+}
+
+.route__grid > * {
+  min-width: 0;
+}
+
+.route__map {
+  position: sticky;
+  top: calc(var(--header-h) + var(--s-4));
+  display: grid;
+  gap: var(--s-3);
+  padding: var(--s-3);
+}
+
+.route__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.seg {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+
+.seg button {
+  min-height: 36px;
+  padding: 0 var(--s-3);
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-2);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.seg button[aria-pressed="true"] {
+  background: var(--brand-grad);
+  color: var(--brand-ink);
+}
+
+.route__day {
+  min-height: 36px;
+  cursor: pointer;
+}
+
+.ymap {
+  height: calc(100dvh - var(--header-h) - 220px);
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface-3);
+}
+
+/* Линии ymaps3 рисует в SVG шире контейнера — глобальный max-width: 100% его сжимает */
+.ymap svg {
+  max-width: none;
+}
+
+.ymap--stub {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: var(--s-2);
+  padding: var(--s-8);
+  text-align: center;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 12px, var(--grid-line) 12px 13px),
+    var(--surface-2);
+}
+
+.ymap__stub-title {
+  font-weight: 800;
+}
+
+.route__legend {
+  margin: 0;
+}
+
+.route__side {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.route__insights {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr);
+  gap: var(--s-4);
+  margin-top: var(--s-4);
+}
+
+.route__insights > * {
+  min-width: 0;
+}
+
+/* Метки на карте (DOM-узлы в слое ymaps3): центр метки — в точке */
+.rm {
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: #3987e5;
+  color: #fff;
+  font: 700 11px/1 var(--font-mono);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.4);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+/* Заливка непрозрачная: иначе линия трека просвечивает сквозь номер */
+.rm--sim {
+  background: #cde1f9;
+  border-color: #3987e5;
+  color: #0b2447;
+}
+
+:root[data-theme="dark"] .rm--sim {
+  background: #1d3a5f;
+  color: #fff;
+}
+
+.rm--real {
+  background: #ffe14d;
+  border-color: #1a1500;
+  color: #1a1500;
+}
+
+.rm--lookalike {
+  background: #e34948;
+  border-color: #fff;
+  background-image: linear-gradient(135deg, transparent 45%, #fff 45%, #fff 55%, transparent 55%);
+}
+
+/* Выбранное в ленте или на карте появление */
+.rm.is-selected {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+  transform: translate(-50%, -50%) scale(1.25);
+}
+
+.rm--legend {
+  display: inline-block;
+  min-width: 14px;
+  height: 14px;
+  padding: 0;
+  vertical-align: middle;
+  transform: none;
+  box-shadow: none;
+}
+
+.rm-place {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px 4px 6px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  color: #fff;
+  font: 800 12px/1 var(--font-sans);
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.45);
+  transform: translate(-50%, -120%);
+  cursor: pointer;
+}
+
+.rm-place--night {
+  background: #3b3f9f;
+}
+
+.rm-place--day {
+  background: #b86e00;
+}
+
+.rm-place__icon {
+  font-size: 14px;
+}
+
+/* Карточка появления поверх карты */
+.scard {
+  position: absolute;
+  top: 64px;
+  left: 24px;
+  z-index: 5;
+  display: grid;
+  gap: var(--s-2);
+  width: min(300px, calc(100% - 48px));
+  padding: var(--s-3);
+  box-shadow: var(--shadow-pop);
+  font-size: 0.85rem;
+}
+
+.scard img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: #05080c;
+}
+
+.scard__close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 1.2rem;
+  /* кнопка лежит на кадре — нужна плотная подложка */
+  --btn-bg: var(--surface);
+  --btn-border: var(--border);
+}
+
+.scard__illus {
+  width: fit-content;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--warn-bg);
+  color: var(--warn);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.scard__addr {
+  font-weight: 800;
+}
+
+.scard__list {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Панели */
+.rpanel {
+  display: grid;
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-5);
+}
+
+.rpanel__title {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.rpanel__title svg {
+  width: 18px;
+  height: 18px;
+  color: var(--danger);
+}
+
+.rpanel__note {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.places {
+  display: grid;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.place {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: var(--s-3);
+  width: 100%;
+  padding: var(--s-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.place:hover {
+  border-color: var(--brand);
+}
+
+.place__icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+.place__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.place__body {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.place__fact {
+  font-weight: 800;
+}
+
+.place__addr,
+.place__explain {
+  color: var(--text-2);
+  font-size: 0.82rem;
+}
+
+/* Внутри <button> допустимы только строчные элементы — метр собран из span */
+.place .meter,
+.place .meter__fill {
+  display: block;
+}
+
+.place__guess {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-2);
+  font-size: 0.85rem;
+}
+
+.rejected {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-2);
+}
+
+.rejected figure {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+}
+
+.rejected img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: #05080c;
+}
+
+.rejected figcaption {
+  color: var(--text-2);
+  font-size: 0.75rem;
+}
+
+.rejected__why {
+  grid-column: 1 / -1;
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--radius-sm);
+  background: var(--danger-bg);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tl {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  max-height: 520px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.tl__head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.tl__toggle {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--s-2);
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 var(--s-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.tl__toggle:hover {
+  background: var(--surface-2);
+}
+
+.tl__chevron {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  transition: transform var(--t-fast) var(--ease-out);
+}
+
+.tl__toggle[aria-expanded="true"] .tl__chevron {
+  transform: rotate(90deg);
+}
+
+.tl__date {
+  min-width: 96px;
+  font-weight: 700;
+}
+
+.tl__show.is-active {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+.tl__items {
+  display: grid;
+  gap: 2px;
+  margin: 0 0 var(--s-2);
+  padding: 0 0 0 var(--s-3);
+  list-style: none;
+}
+
+/* .tl прокручивается и обрезает всё за своим краем — обводку фокуса рисуем внутри */
+.tl :focus-visible {
+  outline-offset: -2px;
+}
+
+.tl__item {
+  display: grid;
+  grid-template-columns: 48px 20px minmax(0, 1fr) auto;
+  gap: var(--s-2);
+  align-items: center;
+  width: 100%;
+  min-height: 36px;
+  padding: 0 var(--s-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.82rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.tl__item:hover {
+  background: var(--surface-2);
+}
+
+.tl__kind svg {
+  width: 16px;
+  height: 16px;
+}
+
+.tl__kind--real {
+  color: var(--warn);
+}
+
+.tl__kind--sim {
+  color: var(--muted);
+}
+
+.tl__addr {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Активность 7 × 24 */
+.heat {
+  margin: 0;
+  padding: var(--s-5);
+}
+
+.heat__grid {
+  display: grid;
+  grid-template-columns: 28px repeat(24, minmax(0, 1fr));
+  gap: 2px;
+  font-size: 0.7rem;
+}
+
+.heat__row {
+  display: contents;
+}
+
+.heat__hour,
+.heat__day {
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+
+.heat__cell {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--brand) calc(var(--v) * 100%), var(--surface-3));
+}
+
+.cities {
+  padding: var(--s-5);
+}
+
+.cities ul {
+  display: grid;
+  gap: var(--s-2);
+  margin: var(--s-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cities li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0 var(--s-3);
+}
+
+.cities__name {
+  font-weight: 700;
+}
+
+.cities__count {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.cities li .muted {
+  grid-column: 1 / -1;
+  font-size: 0.78rem;
+}
+
+/* Без карты переключатель охвата и легенда ничего не меняют */
+.route__map:has(.ymap--stub) .seg,
+.route__map:has(.ymap--stub) .route__legend {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .route__grid,
+  .route__insights {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .route__map {
+    position: relative;
+    top: auto;
+  }
+
+  .ymap {
+    height: 55dvh;
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 640px) {
+  .route__stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* 5 плиток в 3 колонки: последняя закрывает пустую шестую ячейку */
+  .route__stat:last-child {
+    grid-column: span 2;
+  }
+
+  .rejected {
+    grid-template-columns: 1fr;
+  }
+
+  .heat__grid {
+    font-size: 0.6rem;
+  }
+
+  /* Шапка дня переносится, чтобы «Трек дня» оставался в карточке */
+  .tl__toggle {
+    flex-wrap: wrap;
+    row-gap: 0;
+  }
+
+  .tl__date {
+    min-width: 0;
+  }
+}

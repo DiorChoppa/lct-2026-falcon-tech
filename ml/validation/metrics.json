@@ -1,0 +1,19 @@
+{
+  "mAP@10": 0.9200480870642831,
+  "Rank-1": 0.9127906976744186,
+  "Rank-5": 0.9593023255813954,
+  "TP": 148,
+  "FP": 0,
+  "FN": 24,
+  "TN": 43,
+  "F1": 0.9249999999999999,
+  "TNR": 1.0,
+  "PR-AUC": 0.9839010619656999,
+  "Q": 0.9475,
+  "threshold": 0.720700740814209,
+  "threshold_origin": "calibration",
+  "model_sha256": "a1a63bcbfc00388ad6612a33c4861ffae8684a67bb3c0f1cb0d380b0b4bec1e0",
+  "n_queries": 215,
+  "n_gallery": 750,
+  "scope": "Frozen-threshold native SEARCH development evidence"
+}

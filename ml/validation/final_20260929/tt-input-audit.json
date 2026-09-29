@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "external_extra_images": 138517,
+  "external_extra_identities": 10000,
+  "contest_reference_images": 11416,
+  "fresh_file_hash_mismatches": 0,
+  "overlap_counts": {
+    "file": 0,
+    "full_rgb": 0,
+    "crop_rgb": 0
+  },
+  "failures": [],
+  "inventory_sha256": "17ea29a431f6bb3acdfb6da3d8f255b2a252f3542b57d146e84ebf71f01331ef",
+  "parent_sha256": "4abc470e140efdd372ee0b791e537cdef401ba5b4cdb9f6fbfae301a487d69d4",
+  "note": "External public test split, permitted by organizer Q46. Pixel comparisons use original RGB hashes after exact encoded-file verification. Contest inventory was independently rehashed by audit_data.py. No perceptual duplicate or foundation-corpus guarantee.",
+  "wall_seconds": 45.09299999999348
+}

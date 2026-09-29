@@ -1,0 +1,55 @@
+{
+  "scope": "Windows RTX 3090 on 616.92; PTX JIT disabled; not the Linux jury image",
+  "runs": [
+    {
+      "run": "benchmark.json",
+      "status": "completed",
+      "latency_median_ms": 19.858649999999997,
+      "latency_p95_ms": 27.68667,
+      "best_fps": 187.39726401582647,
+      "fps_by_batch": [
+        {
+          "batch_size": 1,
+          "fps": 49.606913618732726
+        },
+        {
+          "batch_size": 8,
+          "fps": 170.42846013526005
+        },
+        {
+          "batch_size": 16,
+          "fps": 182.1706726270567
+        },
+        {
+          "batch_size": 32,
+          "fps": 187.39726401582647
+        }
+      ]
+    },
+    {
+      "run": "benchmark-repeat.json",
+      "status": "completed",
+      "latency_median_ms": 18.1124,
+      "latency_p95_ms": 21.23085,
+      "best_fps": 187.55931575778698,
+      "fps_by_batch": [
+        {
+          "batch_size": 1,
+          "fps": 53.92826623809807
+        },
+        {
+          "batch_size": 8,
+          "fps": 171.28239186539292
+        },
+        {
+          "batch_size": 16,
+          "fps": 182.7442328005796
+        },
+        {
+          "batch_size": 32,
+          "fps": 187.55931575778698
+        }
+      ]
+    }
+  ]
+}

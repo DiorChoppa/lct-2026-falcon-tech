@@ -1,0 +1,21 @@
+[package]
+name = "reid-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+# Владелец: Кирилл. Rust-версия артефактов сдачи для проверки паритета с Python-пайплайном.
+
+[[bin]]
+name = "reid-cli"
+path = "src/main.rs"
+
+[dependencies]
+common.workspace = true
+inference.workspace = true
+anyhow.workspace = true
+serde_json.workspace = true
+clap.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true

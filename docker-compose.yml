@@ -1,0 +1,142 @@
+# Запуск всего решения одной командой: docker compose up --build
+# GPU: docker compose -f docker-compose.yml -f docker-compose.gpu.yml up
+name: reid
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: reid
+      POSTGRES_PASSWORD: reid
+      POSTGRES_DB: reid
+    volumes:
+      - ./data/pg:/var/lib/postgresql/data
+    # Порт наружу — для локальной разработки (gallery/search вне Docker, bench); DB_PORT из .env
+    ports: ["${DB_PORT:-5432}:5432"]
+    # Параллельное построение HNSW (pgvector) держит граф в /dev/shm; дефолт Docker — 64 МБ
+    shm_size: 3gb
+    # HNSW-индекс должен сидеть в памяти: 10^6 × 512-d ≈ 2.5 ГБ (bench/results).
+    # Для демо-галереи хватает 512MB; PG_SHARED_BUFFERS в .env для ANN-демо.
+    command: ["postgres", "-c", "shared_buffers=${PG_SHARED_BUFFERS:-512MB}"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U reid -d reid"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  inference:
+    build:
+      context: .
+      dockerfile: deploy/rust.Dockerfile
+      args: { BIN: inference }
+    environment:
+      # Адрес/манифест берутся из crates/inference/config/development.toml
+      # (уже 0.0.0.0:50051 и models/model.json относительно WORKDIR /app);
+      # переопределять переменными INFERENCE__GRPC_SERVER__{HOST,PORT} и
+      # INFERENCE__MODEL__MANIFEST_PATH нужно только если значения не подходят.
+      # Allow-listed root for file:// crop_uri, тот же том, что пишет gallery.
+      INFERENCE__STORAGE__CROPS_DIR: /app/data/crops
+      INFERENCE__LOGGER__FORMAT: json
+      RUST_LOG: info
+    volumes:
+      - ./data/crops:/app/data/crops
+    ports: ["50051:50051", "8081:8081"]
+
+  gallery:
+    build:
+      context: .
+      dockerfile: deploy/rust.Dockerfile
+      args: { BIN: gallery }
+    environment:
+      # crates/gallery/config/development.toml даёт остальное (grpc 0.0.0.0:50054);
+      # здесь переопределяем то, что внутри compose не совпадает с локальным dev.
+      GALLERY__DATABASE__URL: postgres://reid:reid@db:5432/reid
+      GALLERY__INFERENCE__URL: http://inference:50051
+      # Тот же allow-listed том, что читает inference (INFERENCE__STORAGE__CROPS_DIR).
+      GALLERY__STORAGE__BUCKET_URL: file:///app/data/crops/gallery-crops
+      # Не в depends_on: gallery падение tagger не должно блокировать её
+      # старт (04-architecture.md §6), Enqueue соединяется лениво.
+      GALLERY__TAGGER__URL: http://tagger:50052
+      GALLERY__LOGGER__FORMAT: json
+      RUST_LOG: info
+    volumes:
+      - ./data/crops:/app/data/crops
+    depends_on:
+      db: { condition: service_healthy }
+      inference: { condition: service_started }
+    ports: ["50054:50054"]
+
+  search:
+    build:
+      context: .
+      dockerfile: deploy/rust.Dockerfile
+      args: { BIN: search }
+    environment:
+      # crates/search/config/development.toml даёт остальное (grpc 0.0.0.0:50053).
+      # DATABASE_URL здесь — суперюзер reid, как и у gallery сейчас;
+      # переключить на search_ro (crates/gallery/migrations/0001_init.sql) —
+      # отдельная задача по секретам, не блокирует запуск.
+      SEARCH__DATABASE__URL: postgres://reid:reid@db:5432/reid
+      SEARCH__INFERENCE__URL: http://inference:50051
+      SEARCH__STORAGE__BUCKET_URL: file:///app/data/crops/query-crops
+      SEARCH__LOGGER__FORMAT: json
+      RUST_LOG: info
+    volumes:
+      - ./data/crops:/app/data/crops
+    depends_on:
+      db: { condition: service_healthy }
+      inference: { condition: service_started }
+      # Схему БД создаёт gallery при старте (04-architecture.md §5).
+      gallery: { condition: service_started }
+    ports: ["50053:50053"]
+
+  tagger:
+    build:
+      context: .
+      dockerfile: tagger/Dockerfile
+    environment:
+      TAGGER_ADDR: 0.0.0.0:50052
+      GALLERY_ADDR: gallery:50054
+    ports: ["50052:50052"]
+
+  api:
+    # Имя сервиса остаётся api: web/nginx.conf проксирует на api:8080.
+    build:
+      context: .
+      dockerfile: deploy/rust.Dockerfile
+      args: { BIN: api-gateway }
+    environment:
+      API_ADDR: 0.0.0.0:8080
+      GALLERY_URL: http://gallery:50054
+      SEARCH_URL: http://search:50053
+      INFERENCE_URL: http://inference:50051
+      # Тот же том, куда пишут gallery/search: file:// crop_uri отдаются как /files/crops/...
+      CROPS_DIR: /app/data/crops
+      DATASET_DIR: /app/dataset
+      # Только threshold для ответа /api/search; применяет порог search из того же файла.
+      MODEL_MANIFEST: models/model.json
+      RUST_LOG: info
+    volumes:
+      - ./data/crops:/app/data/crops:ro
+      - ./dataset:/app/dataset:ro   # для импорта галереи по CSV датасета
+    # service_started, а не service_healthy: у gallery/search/inference нет
+    # healthcheck — в образе debian-slim нет grpc_health_probe/curl (варианты —
+    # docs/02-plan.md, «Переход»). /api/health опрашивает их gRPC health и
+    # отвечает 503, пока зависимости не SERVING.
+    depends_on:
+      gallery: { condition: service_started }
+      search: { condition: service_started }
+      inference: { condition: service_started }
+    ports: ["8080:8080"]
+
+  web:
+    build:
+      context: ./web
+    environment:
+      # Пустые — без пароля (локально); на публичной ВМ задать в .env
+      BASIC_AUTH_USER: ${BASIC_AUTH_USER:-}
+      BASIC_AUTH_PASSWORD: ${BASIC_AUTH_PASSWORD:-}
+      # Ключ Яндекс Карт для экрана «Маршрут ТС»; пустой — вместо карты заглушка
+      YMAPS_KEY: ${YMAPS_KEY:-}
+    depends_on: [api]
+    ports: ["${WEB_PORT:-3000}:80"]

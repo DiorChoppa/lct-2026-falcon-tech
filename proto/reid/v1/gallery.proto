@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package reid.v1;
+
+import "inference.proto";
+import "tagger.proto";
+
+// Сервис галереи: записи, кропы, ГРЗ, теги, версия модели, миграции. Не
+// ищет и не ранжирует — это crates/search.
+service Gallery {
+  // Кадр + bbox → кроп (общим кодом с inference), Embed, запись.
+  rpc Add(AddRequest) returns (GalleryItem);
+  // Пачка кадров, как шлёт api-gateway при разборе CSV (по 64 за раз).
+  rpc Import(ImportRequest) returns (ImportResponse);
+  rpc Get(GetRequest) returns (GalleryItem);
+  rpc List(ListRequest) returns (ListResponse);
+  rpc SetPlate(SetPlateRequest) returns (GalleryItem);
+  // Вызывается tagger'ом после Enqueue; gallery не ждёт tagger на своём пути.
+  rpc SetTags(SetTagsRequest) returns (SetTagsResponse);
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
+  // Пересчитывает эмбеддинги записей со старой model_version.
+  rpc Reindex(ReindexRequest) returns (ReindexResponse);
+}
+
+message AddRequest {
+  // Полный кадр JPEG/PNG.
+  bytes image = 1;
+  BBox bbox = 2;
+  // Пусто — сгенерируется случайный id.
+  string image_id = 3;
+  string vehicle_id = 4;
+  string plate = 5;
+}
+
+message ImportItem {
+  bytes image = 1;
+  BBox bbox = 2;
+  string image_id = 3;
+  string vehicle_id = 4;
+}
+
+message ImportRequest {
+  repeated ImportItem items = 1;
+}
+
+message ImportError {
+  string image_id = 1;
+  string message = 2;
+}
+
+message ImportResponse {
+  int32 imported = 1;
+  int32 failed = 2;
+  repeated ImportError errors = 3;
+}
+
+message GalleryItem {
+  int64 id = 1;
+  string image_id = 2;
+  string vehicle_id = 3;
+  BBox bbox = 4;
+  // object_store URL кропа; api-gateway превращает в presigned URL или /files/....
+  string crop_uri = 5;
+  string plate = 6;
+  repeated Tag tags = 7;
+  string model_version = 8;
+  int64 created_at_unix = 9;
+}
+
+message GetRequest {
+  int64 id = 1;
+}
+
+message ListRequest {
+  uint32 page = 1;
+  uint32 page_size = 2;
+}
+
+message ListResponse {
+  repeated GalleryItem items = 1;
+  uint64 total_items = 2;
+}
+
+message SetPlateRequest {
+  int64 id = 1;
+  // Пусто — снять ГРЗ.
+  string plate = 2;
+}
+
+message SetTagsRequest {
+  int64 item_id = 1;
+  repeated Tag tags = 2;
+}
+
+message SetTagsResponse {}
+
+message DeleteRequest {
+  int64 id = 1;
+}
+
+message DeleteResponse {}
+
+message ReindexRequest {
+  // Пусто — все записи не с последней model_version.
+  string model_version = 1;
+}
+
+message ReindexResponse {
+  int32 reindexed = 1;
+}

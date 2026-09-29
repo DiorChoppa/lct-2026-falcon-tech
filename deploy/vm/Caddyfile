@@ -1,0 +1,6 @@
+# TLS для демо-стенда (docker-compose.vm.yml): сертификат Let's Encrypt выпускается и
+# продлевается сам; http:// редиректится на https://. Пароль проверяет nginx в web.
+{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy web:80
+}

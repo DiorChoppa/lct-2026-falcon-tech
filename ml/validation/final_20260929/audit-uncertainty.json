@@ -1,0 +1,15 @@
+{
+  "repetitions": 5000,
+  "seed": 20260929,
+  "known_identities": 158,
+  "method": "Known identity cluster resampling; normalize to 160 known and independently resample 40 unknown queries.",
+  "mAP@10_95pct": [
+    0.8231558101227914,
+    0.9113888789845092
+  ],
+  "Q_95pct": [
+    0.9003212590230362,
+    0.9655737704918033
+  ],
+  "limitation": "Conditional interval on a previously opened audit fold, not selection-adjusted hidden-test uncertainty."
+}

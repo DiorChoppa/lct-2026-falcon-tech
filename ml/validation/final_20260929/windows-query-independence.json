@@ -1,0 +1,77 @@
+{
+  "status": "pass_with_batch_shape_rounding",
+  "scope": "Local Windows CUDA runtime, PTX JIT disabled. Same-shape reorder and unchanged gallery are byte-exact. Changing B1/B32 shape causes small FP16 numerical shifts. Not a cross-query retrieval mechanism; not Linux image/535 validation.",
+  "batch_size": 32,
+  "original_queries": 33,
+  "gallery": 50,
+  "comparisons": [
+    {
+      "variant": "reversed",
+      "queries": 33,
+      "gallery": 50,
+      "maximum_embedding_absolute_difference": 0.0001939050853252411,
+      "minimum_embedding_cosine": 0.9999980272905263,
+      "same_batch_shape_embeddings_bit_exact": 81,
+      "gallery_embeddings_bit_exact": true,
+      "rankings_identical": true,
+      "refusal_decisions_identical": true,
+      "maximum_accepted_score_difference": 4.976987838745117e-05
+    },
+    {
+      "variant": "singleton",
+      "queries": 1,
+      "gallery": 50,
+      "maximum_embedding_absolute_difference": 0.0,
+      "minimum_embedding_cosine": 0.9999999999999998,
+      "same_batch_shape_embeddings_bit_exact": 51,
+      "gallery_embeddings_bit_exact": true,
+      "rankings_identical": true,
+      "refusal_decisions_identical": true,
+      "maximum_accepted_score_difference": 0.0
+    }
+  ],
+  "binary_sha256": "c6c1fc7e1828eddf83f87ddb25c664f39124393adc8888a9a811a80bd044fe79",
+  "config": {
+    "schema_version": 1,
+    "gallery_csv": "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\final_submission_20260929\\windows-native\\query-independence-run2\\gallery.csv",
+    "images_dir": "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\Data\\dataset\\images",
+    "runtime": {
+      "path": "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\.venv\\Lib\\site-packages\\onnxruntime\\capi\\onnxruntime.dll",
+      "sha256": "c63af7de44303e401b283457fdb510caa65756afa1e8c4f43f90195358c4294b"
+    },
+    "models": [
+      {
+        "graph": {
+          "path": "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\final_submission_20260929\\staging\\models\\model.onnx",
+          "sha256": "ff7194b127f000436caac0e7be80e89192210396257b09f1f5127c25bfd73f71"
+        },
+        "preprocessing": {
+          "size": 256,
+          "mean": [
+            0.485,
+            0.456,
+            0.406
+          ],
+          "std": [
+            0.229,
+            0.224,
+            0.225
+          ],
+          "mode": "stretch",
+          "crop_pct": 1.0
+        },
+        "metadata_policy": {
+          "path": "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\final_submission_20260929\\windows-native\\policy.json",
+          "sha256": "b32cd83c5185440ed94cf215b3d026b087309b07a6e919ee686490d0bb7864ba"
+        }
+      }
+    ],
+    "threshold": 0.6538920402526855,
+    "threshold_status": "frozen_calibration",
+    "batch_size": 32,
+    "preprocessing_options": {
+      "workers": 4,
+      "reuse_identical": true
+    }
+  }
+}

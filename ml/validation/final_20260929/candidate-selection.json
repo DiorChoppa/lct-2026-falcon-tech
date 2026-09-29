@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-09-29T09:05:06.412146+00:00",
+  "selected_checkpoint": "experiments/runs/vitl_tt_fit_e8/checkpoints/epoch0008-batch0000-step0002864.weights.pt",
+  "checkpoint_sha256": "26032a04664494ddf70e4cabf51b5a87b4ffee1ec90c637b29c2d661af6de772",
+  "model_sha256": "a1a63bcbfc00388ad6612a33c4861ffae8684a67bb3c0f1cb0d380b0b4bec1e0",
+  "model_bytes": 607325498,
+  "policy_sha256": "f43c01750b27396dcba069413a3ef50f067875e28927f42713d71cc3e44e6adc",
+  "native_SEARCH_mAP@10": 0.9200480870642831,
+  "incumbent_native_SEARCH_mAP@10": 0.910658667536782,
+  "historical_BF16_SEARCH_mAP@10": 0.9195635909402521,
+  "fresh_same_seed_SEARCH_mAP@10": 0.9121270368612561,
+  "historical_second_seed_SEARCH_mAP@10": 0.9040691082634603,
+  "native_latency_ms": 22.382342,
+  "native_fps": 187.37846796201592,
+  "python_latency_ms": 21.18,
+  "python_fps": 120.0,
+  "decision": "Choose original TT checkpoint for higher SEARCH accuracy, successful fresh fine-tuning reproduction within 0.744 pp, numeric parity, graph placement, and local full-speed proxy qualification. Same architecture and image size as incumbent.",
+  "uncertainty": "Two-seed DBA gain confidence interval includes zero; SEARCH is adaptive development evidence. No guarantee of hidden-test superiority.",
+  "holdout_policy": "Calibrate this fixed candidate next; then one audit with frozen thresholds. Previously opened incumbent calibration/audit cannot be described as pristine holdouts. No audit-driven model changes.",
+  "training_scope": "Fresh FIT fine-tuning only from verified external parent; public external TT corpus audited in full; foundation/external stages not freshly retrained."
+}

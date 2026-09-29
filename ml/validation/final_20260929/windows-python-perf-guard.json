@@ -1,0 +1,313 @@
+{
+  "command": [
+    "C:/Users/serge/Data/Projects/LCT_2026/.venv/Scripts/python.exe",
+    "-m",
+    "reid.perf",
+    "--images",
+    "Data/dataset/images",
+    "--csv",
+    "Data/dataset/test_query.csv",
+    "--manifest",
+    "artifacts/final_submission_20260929/staging/models/model.json",
+    "--json",
+    "artifacts/final_submission_20260929/windows-native/python-perf.json",
+    "--embeddings",
+    "artifacts/final_submission_20260929/windows-native/python-perf.npy"
+  ],
+  "exit_code": 0,
+  "failure": null,
+  "wall_seconds": 71.68700000003446,
+  "samples": [
+    {
+      "temperature_c": 32.0,
+      "gpu_memory_mib": 1104.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 19.664234161376953,
+      "free_disk_gib": 320.8605842590332
+    },
+    {
+      "temperature_c": 32.0,
+      "gpu_memory_mib": 1104.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 19.658916473388672,
+      "free_disk_gib": 320.8605728149414,
+      "elapsed_seconds": 0.0470000000204891
+    },
+    {
+      "temperature_c": 35.0,
+      "gpu_memory_mib": 1340.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.735137939453125,
+      "free_disk_gib": 320.86056900024414,
+      "elapsed_seconds": 2.094000000040978
+    },
+    {
+      "temperature_c": 41.0,
+      "gpu_memory_mib": 2380.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.73830795288086,
+      "free_disk_gib": 320.86056900024414,
+      "elapsed_seconds": 4.14000000001397
+    },
+    {
+      "temperature_c": 43.0,
+      "gpu_memory_mib": 2380.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.70800018310547,
+      "free_disk_gib": 320.86056900024414,
+      "elapsed_seconds": 6.187000000034459
+    },
+    {
+      "temperature_c": 43.0,
+      "gpu_memory_mib": 2380.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.739826202392578,
+      "free_disk_gib": 320.8604431152344,
+      "elapsed_seconds": 8.234000000054948
+    },
+    {
+      "temperature_c": 44.0,
+      "gpu_memory_mib": 2380.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.691390991210938,
+      "free_disk_gib": 320.8592948913574,
+      "elapsed_seconds": 10.281000000075437
+    },
+    {
+      "temperature_c": 44.0,
+      "gpu_memory_mib": 2380.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.74120330810547,
+      "free_disk_gib": 320.85930252075195,
+      "elapsed_seconds": 12.312000000034459
+    },
+    {
+      "temperature_c": 45.0,
+      "gpu_memory_mib": 2379.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.72738265991211,
+      "free_disk_gib": 320.85930252075195,
+      "elapsed_seconds": 14.359000000054948
+    },
+    {
+      "temperature_c": 45.0,
+      "gpu_memory_mib": 2379.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.743412017822266,
+      "free_disk_gib": 320.85930252075195,
+      "elapsed_seconds": 16.43700000003446
+    },
+    {
+      "temperature_c": 45.0,
+      "gpu_memory_mib": 2379.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.73141860961914,
+      "free_disk_gib": 320.8590621948242,
+      "elapsed_seconds": 18.5
+    },
+    {
+      "temperature_c": 45.0,
+      "gpu_memory_mib": 2379.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.753978729248047,
+      "free_disk_gib": 320.8590621948242,
+      "elapsed_seconds": 20.54700000002049
+    },
+    {
+      "temperature_c": 49.0,
+      "gpu_memory_mib": 2379.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.666275024414062,
+      "free_disk_gib": 320.8590621948242,
+      "elapsed_seconds": 22.594000000040978
+    },
+    {
+      "temperature_c": 50.0,
+      "gpu_memory_mib": 2379.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.72098159790039,
+      "free_disk_gib": 320.8590621948242,
+      "elapsed_seconds": 24.64000000001397
+    },
+    {
+      "temperature_c": 50.0,
+      "gpu_memory_mib": 2379.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.639381408691406,
+      "free_disk_gib": 320.8590621948242,
+      "elapsed_seconds": 26.68700000003446
+    },
+    {
+      "temperature_c": 51.0,
+      "gpu_memory_mib": 2379.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.701099395751953,
+      "free_disk_gib": 320.8589401245117,
+      "elapsed_seconds": 28.734000000054948
+    },
+    {
+      "temperature_c": 51.0,
+      "gpu_memory_mib": 2379.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.642208099365234,
+      "free_disk_gib": 320.8589401245117,
+      "elapsed_seconds": 30.781000000075437
+    },
+    {
+      "temperature_c": 52.0,
+      "gpu_memory_mib": 2379.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.694549560546875,
+      "free_disk_gib": 320.8589401245117,
+      "elapsed_seconds": 32.84400000004098
+    },
+    {
+      "temperature_c": 51.0,
+      "gpu_memory_mib": 3403.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.584136962890625,
+      "free_disk_gib": 320.8589401245117,
+      "elapsed_seconds": 34.89000000001397
+    },
+    {
+      "temperature_c": 53.0,
+      "gpu_memory_mib": 3403.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.62032699584961,
+      "free_disk_gib": 320.8589286804199,
+      "elapsed_seconds": 36.93700000003446
+    },
+    {
+      "temperature_c": 53.0,
+      "gpu_memory_mib": 3403.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.57125473022461,
+      "free_disk_gib": 320.8586845397949,
+      "elapsed_seconds": 38.98400000005495
+    },
+    {
+      "temperature_c": 53.0,
+      "gpu_memory_mib": 3403.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.626495361328125,
+      "free_disk_gib": 320.8586845397949,
+      "elapsed_seconds": 41.03100000007544
+    },
+    {
+      "temperature_c": 54.0,
+      "gpu_memory_mib": 3403.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.574108123779297,
+      "free_disk_gib": 320.8586235046387,
+      "elapsed_seconds": 43.09400000004098
+    },
+    {
+      "temperature_c": 55.0,
+      "gpu_memory_mib": 3403.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.638442993164062,
+      "free_disk_gib": 320.8586235046387,
+      "elapsed_seconds": 45.125
+    },
+    {
+      "temperature_c": 53.0,
+      "gpu_memory_mib": 3403.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.54550552368164,
+      "free_disk_gib": 320.8586235046387,
+      "elapsed_seconds": 47.18700000003446
+    },
+    {
+      "temperature_c": 55.0,
+      "gpu_memory_mib": 3403.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.644947052001953,
+      "free_disk_gib": 320.8584403991699,
+      "elapsed_seconds": 49.23400000005495
+    },
+    {
+      "temperature_c": 55.0,
+      "gpu_memory_mib": 4427.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.510765075683594,
+      "free_disk_gib": 320.8584403991699,
+      "elapsed_seconds": 51.28100000007544
+    },
+    {
+      "temperature_c": 56.0,
+      "gpu_memory_mib": 4427.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.58814239501953,
+      "free_disk_gib": 320.8584403991699,
+      "elapsed_seconds": 53.31200000003446
+    },
+    {
+      "temperature_c": 54.0,
+      "gpu_memory_mib": 4427.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.50838851928711,
+      "free_disk_gib": 320.8584403991699,
+      "elapsed_seconds": 55.35900000005495
+    },
+    {
+      "temperature_c": 55.0,
+      "gpu_memory_mib": 4427.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.583290100097656,
+      "free_disk_gib": 320.8584403991699,
+      "elapsed_seconds": 57.39000000001397
+    },
+    {
+      "temperature_c": 56.0,
+      "gpu_memory_mib": 4427.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.57077407836914,
+      "free_disk_gib": 320.8584403991699,
+      "elapsed_seconds": 59.453000000095926
+    },
+    {
+      "temperature_c": 57.0,
+      "gpu_memory_mib": 4427.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.593772888183594,
+      "free_disk_gib": 320.8584403991699,
+      "elapsed_seconds": 61.5
+    },
+    {
+      "temperature_c": 56.0,
+      "gpu_memory_mib": 4427.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.552433013916016,
+      "free_disk_gib": 320.8584403991699,
+      "elapsed_seconds": 63.54700000002049
+    },
+    {
+      "temperature_c": 55.0,
+      "gpu_memory_mib": 4427.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.59146499633789,
+      "free_disk_gib": 320.8584403991699,
+      "elapsed_seconds": 65.59400000004098
+    },
+    {
+      "temperature_c": 56.0,
+      "gpu_memory_mib": 4427.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.51214599609375,
+      "free_disk_gib": 320.8584327697754,
+      "elapsed_seconds": 67.65600000007544
+    },
+    {
+      "temperature_c": 57.0,
+      "gpu_memory_mib": 4427.0,
+      "power_limit_w": 350.0,
+      "free_ram_gib": 18.57967758178711,
+      "free_disk_gib": 320.85824966430664,
+      "elapsed_seconds": 69.68700000003446
+    }
+  ],
+  "peak_temperature_c": 57.0,
+  "peak_gpu_memory_mib": 4427.0,
+  "minimum_free_ram_gib": 18.50838851928711,
+  "minimum_free_disk_gib": 320.85824966430664
+}

@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "ordered_exact_two_row_diff": true,
+  "source_and_parent_hashes_unchanged": true,
+  "retained_control_8010": true,
+  "foreign_identity_rows_unchanged": true,
+  "synthetic_foreign_identity_exact_key_check": true,
+  "all_prior_exclusions_inherited": true,
+  "role_reassignment": false,
+  "protected_roles_opened": false,
+  "csv_sha256": "fe1394a9fbc7ba5e21eeed802252d373348940ebece6d0ae5a6c4727215ff962",
+  "manifest_sha256": "122d96ed410931644aaa689c4eaaa4f58f6d88070fdbf65fd76e67efaf26d73b",
+  "prepare_sha256": "743b514d489d3f8ac5c4c863362d849d6df220b92697e5f12bdc679d664b8e56"
+}

@@ -1,0 +1,30 @@
+[project]
+name = "reid-tagger"
+version = "0.1.0"
+description = "Сервис тегов: zero-shot детали по кропу, асинхронно через Enqueue/SetTags"
+requires-python = ">=3.11"
+dependencies = [
+    "grpcio>=1.66",
+    "grpcio-health-checking>=1.66",
+    "protobuf>=5",
+    "pyyaml>=6",
+    # torch/transformers добавляет Иван, когда подключит реальный zero-shot
+    # детектор (CLIP/OWLv2) вместо NullBackend: "torch", "transformers", "timm"
+]
+
+[dependency-groups]
+dev = ["ruff>=0.6", "pytest>=8", "grpcio-tools>=1.66"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint.isort]
+# Стабы из `just proto-py` не в git: без правила их группа зависит от того,
+# сгенерированы ли они локально, и CI расходится с машиной разработчика.
+known-third-party = ["*_pb2", "*_pb2_grpc"]
+
+[tool.pytest.ini_options]
+# tagger/*.py и сгенерированные *_pb2*.py — плоские модули без пакета,
+# запуск pytest не из tagger/ иначе не найдёт import backend/server/....
+pythonpath = ["."]

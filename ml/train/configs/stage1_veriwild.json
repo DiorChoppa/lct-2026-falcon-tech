@@ -1,0 +1,22 @@
+{
+  "_comment": "Stage 1: VeRi-Wild TRAIN, DINOv3 ViT-L/16 init, fresh 30,671-class head. 2 x 17,363 = 34,726 updates.",
+  "model": "vit_large_patch16_dinov3.lvd1689m",
+  "global_pool": "token",
+  "image_size": 256,
+  "resize_mode": "stretch",
+  "neck": "bn",
+  "triplet_space": "post_bn",
+  "epochs": 2,
+  "batch_size": 16,
+  "samples_per_id": 4,
+  "lr": 3e-05,
+  "head_lr": 0.0003,
+  "weight_decay": 0.05,
+  "triplet_weight": 1.0,
+  "margin": 0.3,
+  "label_smoothing": 0.1,
+  "warmup_steps": 50,
+  "seed": 20260920,
+  "workers": 0,
+  "amp": "bf16"
+}

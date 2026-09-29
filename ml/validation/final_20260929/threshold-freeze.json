@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-09-29T09:05:53.557061+00:00",
+  "model_sha256": "a1a63bcbfc00388ad6612a33c4861ffae8684a67bb3c0f1cb0d380b0b4bec1e0",
+  "manifest_sha256": "1015c336d068563fad87d7a1d368a938094a2067652cf25e80b29ce80dfd1695",
+  "selection_sha256": "5487cc290a2aec101da2c29853caccf94d4694801e237076719d9c63ae65754b",
+  "script_sha256": "56e06697868a2aa347005f98046503f152093db2fbcefbfc621918886a3905b7",
+  "calibration_known": 160,
+  "calibration_unknown": 40,
+  "plain_threshold": 0.6959864497184753,
+  "dba_threshold": 0.720700740814209,
+  "ranking": {
+    "n_scored": 160,
+    "n_openset_excluded": 40,
+    "mAP@10": 0.8299992087112622,
+    "Rank-1": 0.79375,
+    "Rank-5": 0.91875
+  },
+  "refusal": {
+    "TP": 142,
+    "FP": 0,
+    "FN": 18,
+    "TN": 40,
+    "n_openset_queries": 40,
+    "Precision": 1.0,
+    "Recall": 0.8875,
+    "F1": 0.9403973509933775,
+    "TNR": 1.0,
+    "PR-AUC": 0.9850571609175808
+  },
+  "Q": 0.9582781456953642,
+  "calibration_input_sha256": {
+    "query.csv": "9f14fc566250b5aa980a0c40622ee3ba733875cbc6fec18ff86f014022772179",
+    "gallery.csv": "978fac4e468da6eecb44a43874db7156ede4131457f98ef8c1776c1444e82729",
+    "ground_truth.csv": "f83480bd02c92ce38747bc41b6e1db8df42582d84585c7b8364419929acd8bbc"
+  },
+  "evaluator_sha256": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3",
+  "limitation": "These roles were previously opened for the incumbent. This is a new fixed-candidate finalization, not an untouched holdout claim."
+}

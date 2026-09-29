@@ -1,0 +1,54 @@
+{
+  "date": "2026-09-29",
+  "tool_version": "0.11.0",
+  "projects": {
+    "LCT_2026": {
+      "status": "indexed",
+      "nodes": 2246,
+      "edges": 7612,
+      "skipped_count": 0,
+      "parse_partial_count": 0,
+      "parse_unusable_count": 0,
+      "parse_partial": null,
+      "not_indexed_files_count": 412
+    },
+    "lct_submission": {
+      "status": "indexed",
+      "nodes": 5360,
+      "edges": 14304,
+      "skipped_count": 0,
+      "parse_partial_count": 4,
+      "parse_unusable_count": 0,
+      "parse_partial": {
+        "files": [
+          {
+            "path": "crates/gallery/migrations/0001_init.sql",
+            "error_ranges": "6-6,8-8,8-9,10-10,11-11,11-12,13-15,27-27,28-31,34-34,66-67,67-67,68-69,69-69,71-71,72-72,73-73"
+          },
+          {
+            "path": "crates/gallery/migrations/0002_vitl_1024.sql",
+            "error_ranges": "6-6,8-8"
+          },
+          {
+            "path": "tagger/Dockerfile",
+            "error_ranges": "9-14"
+          },
+          {
+            "path": "web/nginx.conf",
+            "error_ranges": "2-12,16-18,19-20"
+          }
+        ],
+        "count": 4,
+        "truncated": false,
+        "note": "Indexed, but constructs in these line ranges may be missing (best-effort signal); examples only \u2014 full list via index_status or 'logfile'."
+      },
+      "not_indexed_files_count": 49
+    }
+  },
+  "source_of_truth": "Repository source and committed evidence; the graph is a navigation aid",
+  "scope": "Both project roots, filtered by their committed/local .cbmignore files",
+  "known_freshness_limit": "Windows check_index_coverage reports metadata_changed for fresh Python/Markdown and not_tracked for the Dockerfile; read source for those paths",
+  "positive_check": "lct_submission.ml.scripts.calibrate_native.choose resolves to lines16-29 and includes the float32 nextafter fix",
+  "initial_failure": "Unexcluded legacy ORT profile JSON caused an index worker memory failure; exclusion and reindex resolved it; only the session-owned worker was stopped",
+  "adr_memory": "Both MCP project ADRs replaced with current phase, decisions, constraints and evidence pointers"
+}

@@ -1,0 +1,182 @@
+{
+  "_about": "Commands recorded in ml/experiments/ledger.jsonl of commit 058c348^ (Windows workspace paths shortened to the workspace root). They reference files that were never committed (preregistrations, run directories, the external-stage runner, the crop cache); the runnable equivalents are train/stage1_veriwild.py, train/stage2_fit.py and train/export_onnx.py.",
+  "stage1_veriwild_epoch1": {
+    "run_id": "vitl_wild_e1_segment01",
+    "launched_at_utc": "2026-09-22T05:58:34.506925+00:00",
+    "argv": [
+      "artifacts/vitl_wild_pretrain_v1/run_wild_pretrain.py",
+      "--run-dir",
+      "experiments/runs/vitl_wild_e1_segment01",
+      "--preregistration",
+      "artifacts/vitl_wild_pretrain_v1/preregistration.json",
+      "--preregistration-sha256",
+      "5e3b67d39544070cce644c03560f69bb38e17ebe250976bdbb93890a7c251b5e",
+      "--gpu-slot-granted",
+      "--resume-reference",
+      "experiments/runs/vitl_wild_e1_readiness02/resume.json",
+      "--resume-reference-sha256",
+      "efff781ccae72584ba3968f5ed4db61a6054c1a85d53576e88bbb9c0af4a41f6"
+    ],
+    "note": "Runner artifacts/vitl_wild_pretrain_v1/run_wild_pretrain.py is NOT in git; epoch 1 = 17,363 updates."
+  },
+  "stage1_veriwild_epoch2": {
+    "run_id": "vitl_wild_e2_segment01",
+    "launched_at_utc": "2026-09-22T09:29:57.170543+00:00",
+    "argv": [
+      "artifacts/vitl_wild_e2_v1/run_wild_pretrain.py",
+      "--run-dir",
+      "experiments/runs/vitl_wild_e2_segment01",
+      "--preregistration",
+      "artifacts/vitl_wild_e2_v1/preregistration.json",
+      "--preregistration-sha256",
+      "2dcb3dc6c8fbcc163f297feaa3305b3e3837f1509d826c3ed6a6e00754a96adb",
+      "--resume-reference",
+      "experiments/runs/vitl_wild_e1_segment01/resume.json",
+      "--resume-reference-sha256",
+      "dcc37d418b77cb36184307e5ca1af581fd69c780453c40663c835656837af290",
+      "--gpu-slot-granted"
+    ],
+    "note": "Runner artifacts/vitl_wild_e2_v1/run_wild_pretrain.py is NOT in git; resumed epoch-1 state, first step 17,364, terminal 34,726; exported backbone.safetensors sha256 82b46d0d642ecac828ed2e3e6482a680270bed2a374e1fc634969d1ee58ad641."
+  },
+  "stage2_fit_v8_2plus2": {
+    "run_id": "vitl_fit_2plus2_v1_e8",
+    "launched_at_utc": "2026-09-22T11:52:09.177157+00:00",
+    "argv": [
+      "scripts/run_experiment.py",
+      "--run-dir",
+      "experiments/runs/vitl_fit_2plus2_v1_e8",
+      "--stop-at-utc",
+      "2026-09-22T12:17:09.111378+00:00",
+      "--model",
+      "vit_large_patch16_dinov3.lvd1689m",
+      "--resize-mode",
+      "stretch",
+      "--global-pool",
+      "token",
+      "--backbone-stage",
+      "full",
+      "--epochs",
+      "8",
+      "--train-minutes",
+      "20.0",
+      "--batch-size",
+      "16",
+      "--samples-per-id",
+      "4",
+      "--lr",
+      "3e-05",
+      "--head-lr",
+      "0.0003",
+      "--weight-decay",
+      "0.05",
+      "--image-size",
+      "256",
+      "--neck",
+      "bn",
+      "--triplet-space",
+      "post_bn",
+      "--triplet-weight",
+      "1.0",
+      "--margin",
+      "0.3",
+      "--label-smoothing",
+      "0.1",
+      "--warmup-steps",
+      "50",
+      "--lr-schedule",
+      "constant",
+      "--decay-start-step",
+      "0",
+      "--decay-end-step",
+      "0",
+      "--min-lr-factor",
+      "0.1",
+      "--seed",
+      "20260920",
+      "--workers",
+      "2",
+      "--amp",
+      "bf16",
+      "--eval-every",
+      "8",
+      "--max-train-batches",
+      "0",
+      "--evaluation-reserve-seconds",
+      "180.0",
+      "--identity-sampler",
+      "fit_2plus2_v1",
+      "--train-csv",
+      "artifacts/training_filters/v8/train.csv",
+      "--train-crop-cache",
+      "artifacts/source_crop_cache_v8",
+      "--episode",
+      "artifacts/episodes/v1/search",
+      "--images-dir",
+      "Data/dataset/images",
+      "--weights",
+      "experiments/runs/vitl_wild_e2_segment01/backbone.safetensors",
+      "--checkpoint-retention",
+      "last_and_best"
+    ],
+    "source_hashes": {
+      "run_experiment.py": "58518bf584f837e0824942df50c2eb8394cd671d3b9e6cda5333c1d9e1d4ef65",
+      "reid_model.py": "c715786b2acec7b7c8a7581df425d132d0dec2f4ee7e952072adf80ed9d0ee49"
+    },
+    "terminal_checkpoint": {
+      "path": "experiments/runs/vitl_fit_2plus2_v1_e8/checkpoints/epoch0008-batch0000-step0002864.pt",
+      "sha256": "1fb7d811ee5b987138b5ba223ea97d299628de9addfe83bfc205dc827a490696",
+      "bytes": 3648845205
+    }
+  },
+  "export_fp32": {
+    "argv": [
+      "scripts/export_encoder.py",
+      "--checkpoint",
+      "artifacts/vitl_2plus2_single_native_v1/derived/checkpoints/inference.pt",
+      "--output",
+      "artifacts/vitl_2plus2_single_native_v1/export",
+      "--precision",
+      "fp32",
+      "--static-spatial-rope",
+      "--resize-mode",
+      "stretch"
+    ],
+    "wrapper": "artifacts/vitl_2plus2_single_native_v1/run.py (inference-only copy of the terminal checkpoint, then strict ONNX shape inference)",
+    "source_hashes": {
+      "export_encoder.py": "381a68a7eb304ceb0d08d7ac043b7ef67062d18e2639296edae09a2a477dc4e8",
+      "checkpoint_inference.py": "f8f7d7e431247baa9b1408e537f40055894de48c0d545031ca9d9d2eb8f386a2",
+      "reid_model.py": "c715786b2acec7b7c8a7581df425d132d0dec2f4ee7e952072adf80ed9d0ee49"
+    },
+    "fp32_onnx_sha256": "4a509e537c949a1bf19042ff0e5956239d60a104ddcb714d6882f977b4061f02",
+    "fp32_onnx_bytes": 1213213218
+  },
+  "export_mixed": {
+    "argv": [
+      "artifacts/vitl_2plus2_single_native_v1/mixed/convert.py",
+      "--cpu-slot-granted",
+      "--stop-at-utc",
+      "<deadline>"
+    ],
+    "source_hashes": {
+      "convert.py": "c7bda321219bdfaa36c7254bccdd4ee23aaf7f7439d22e95e3d70ff7b67497ae",
+      "residual.py": "4587562390e53fad81680b19640f37f080e8ed3b5922f01a9f11a4ec0dc3f1f8",
+      "onnxruntime/transformers/float16.py (onnxruntime-gpu 1.24.4)": "9cc4d882196728b7ea9e70159ec51808a130b7f9e470f7b74fd2487e0e149f70"
+    },
+    "onnx_sha256": "ff7194b127f000436caac0e7be80e89192210396257b09f1f5127c25bfd73f71",
+    "onnx_bytes": 607325498,
+    "initializer_types": {
+      "FLOAT16": 174,
+      "FLOAT": 150
+    }
+  },
+  "packages": {
+    "torch": "2.14.0+cu126",
+    "torchvision": "0.29.0+cu126",
+    "timm": "1.0.29",
+    "numpy": "2.5.2",
+    "onnx": "1.23.0",
+    "onnxruntime-gpu": "1.24.4",
+    "safetensors": "0.8.0",
+    "pillow": "12.3.0"
+  }
+}

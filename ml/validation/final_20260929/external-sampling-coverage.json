@@ -1,0 +1,15 @@
+{
+  "images": 277797,
+  "identities": 30671,
+  "cameras": 173,
+  "coverage": {
+    "after_epoch_1": {
+      "unique_images": 144710,
+      "unique_identities": 27528
+    },
+    "after_epoch_2": {
+      "unique_images": 189014,
+      "unique_identities": 30383
+    }
+  }
+}

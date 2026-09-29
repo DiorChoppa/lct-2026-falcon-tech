@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "measured_staging_image": "sha256:57590960eb7cda058b8b4bb55c6502c73e09a5865476e53c140923b715ed64dc",
+  "submission_folder_image": "sha256:099f42bf4f21998be21592cbee536c8b28a6488dc2fc7a47566c381042a1ec6a",
+  "rootfs_identical": true,
+  "runtime_config_identical": true,
+  "all_three_outputs_identical_across_images": true,
+  "note": "Docker build attestation changed the image index; filesystem layers and runtime config are identical."
+}

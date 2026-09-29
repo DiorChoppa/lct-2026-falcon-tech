@@ -1,0 +1,78 @@
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Dataset: CSV и README храним, картинки (7.5 ГБ) нет
+dataset/images/
+
+# Rust
+target/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# gRPC-стабы Python генерируются из proto/
+tagger/*_pb2.py
+tagger/*_pb2_grpc.py
+
+# Node
+web/node_modules/
+web/dist/
+
+# Веса моделей: в git только манифест и README, сами веса — в Docker-образ
+models/*
+!models/README.md
+!models/model.json
+!models/model.onnx
+!models/.gitkeep
+!models/tagger/
+models/tagger/*
+!models/tagger/.gitkeep
+
+# ML-эксперименты: чекпоинты и логи не коммитим, experiments.md — да
+ml/runs/
+ml/wandb/
+ml/data/
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+
+# Runtime-данные compose (volumes)
+/data/
+
+# Rust-артефакты для проверки паритета (`just submit-rust`), в git только submission/
+submission-rust/
+/perf-gpu/
+
+# Секреты и локальные переопределения
+.env
+.env.local
+docker-compose.override.yml
+
+# Логи и временное
+*.log
+tmp/
+
+# Артефакт tsc -b, меняется при каждой сборке
+web/*.tsbuildinfo
+
+ml/Data/
+
+!models/policy.json
+!models/DINOV3_LICENSE.md
+!ml/parity/*.npy
+!ml/organizers/**/*.npy
+# Research remains in the separate local workspace.
+ml/artifacts/
+ml/experiments/
+ml/runs/
+ml/readiness/

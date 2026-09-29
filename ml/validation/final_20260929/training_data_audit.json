@@ -1,0 +1,368 @@
+{
+  "date": "2026-09-29",
+  "failures": [],
+  "limitations": [
+    "Historical FIT-v8 excluded 24 of 5746 FIT rows before the later no-pruning rule; this audit preserves the selected weights and makes no new exclusions.",
+    "External and contest RGB/crop comparisons use pinned full-decode inventories; fresh hashes verify encoded-file identity. Exact hashes do not exclude perceptual near duplicates or unknown overlap in foundation pretraining."
+  ],
+  "contest": {
+    "inventory_rows": 11416,
+    "unique_images": 11416,
+    "image_bytes": 7503286826,
+    "fresh_file_hash_mismatches": 0,
+    "protected_files": 11428,
+    "evaluator_sha256": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3"
+  },
+  "role_counts": {
+    "FIT": {
+      "rows": 5722,
+      "unique_images": 5722,
+      "identities": 928
+    },
+    "search": {
+      "rows": 965,
+      "unique_images": 965,
+      "identities": 215
+    },
+    "calibration": {
+      "rows": 950,
+      "unique_images": 950,
+      "identities": 200
+    },
+    "audit": {
+      "rows": 950,
+      "unique_images": 950,
+      "identities": 198
+    },
+    "jury_test": {
+      "rows": 1860,
+      "unique_images": 1860,
+      "identities": 0
+    }
+  },
+  "role_overlap": [
+    {
+      "roles": [
+        "FIT",
+        "search"
+      ],
+      "image_id": 0,
+      "file_sha256": 0,
+      "pixel_sha256": 0,
+      "crop_sha256": 0,
+      "vehicle_id": 0,
+      "scene_group": 0
+    },
+    {
+      "roles": [
+        "FIT",
+        "calibration"
+      ],
+      "image_id": 0,
+      "file_sha256": 0,
+      "pixel_sha256": 0,
+      "crop_sha256": 0,
+      "vehicle_id": 0,
+      "scene_group": 0
+    },
+    {
+      "roles": [
+        "FIT",
+        "audit"
+      ],
+      "image_id": 0,
+      "file_sha256": 0,
+      "pixel_sha256": 0,
+      "crop_sha256": 0,
+      "vehicle_id": 0,
+      "scene_group": 0
+    },
+    {
+      "roles": [
+        "FIT",
+        "jury_test"
+      ],
+      "image_id": 0,
+      "file_sha256": 0,
+      "pixel_sha256": 0,
+      "crop_sha256": 0
+    },
+    {
+      "roles": [
+        "search",
+        "calibration"
+      ],
+      "image_id": 0,
+      "file_sha256": 0,
+      "pixel_sha256": 0,
+      "crop_sha256": 0,
+      "vehicle_id": 0,
+      "scene_group": 0
+    },
+    {
+      "roles": [
+        "search",
+        "audit"
+      ],
+      "image_id": 0,
+      "file_sha256": 0,
+      "pixel_sha256": 0,
+      "crop_sha256": 0,
+      "vehicle_id": 0,
+      "scene_group": 0
+    },
+    {
+      "roles": [
+        "search",
+        "jury_test"
+      ],
+      "image_id": 0,
+      "file_sha256": 0,
+      "pixel_sha256": 0,
+      "crop_sha256": 0
+    },
+    {
+      "roles": [
+        "calibration",
+        "audit"
+      ],
+      "image_id": 0,
+      "file_sha256": 0,
+      "pixel_sha256": 0,
+      "crop_sha256": 0,
+      "vehicle_id": 0,
+      "scene_group": 0
+    },
+    {
+      "roles": [
+        "calibration",
+        "jury_test"
+      ],
+      "image_id": 0,
+      "file_sha256": 0,
+      "pixel_sha256": 0,
+      "crop_sha256": 0
+    },
+    {
+      "roles": [
+        "audit",
+        "jury_test"
+      ],
+      "image_id": 0,
+      "file_sha256": 0,
+      "pixel_sha256": 0,
+      "crop_sha256": 0
+    }
+  ],
+  "fit_v8": {
+    "full_fit_rows": 5746,
+    "trained_rows": 5722,
+    "historical_excluded_rows": 24,
+    "relabeled_or_added_rows": 0,
+    "sha256": "fe1394a9fbc7ba5e21eeed802252d373348940ebece6d0ae5a6c4727215ff962"
+  },
+  "training_crop_cache": {
+    "rows": 5722,
+    "row_order_and_labels_match": true,
+    "fresh_hash_or_pixel_mismatches": 0
+  },
+  "source_and_input_pins": [
+    {
+      "run": "vitl_fit_2plus2_v1_e8",
+      "source": {
+        "run_experiment.py": true,
+        "reid_model.py": true,
+        "reid_eval.py": true,
+        "evaluate.py": true,
+        "source_crop_cache.py": true
+      },
+      "inputs": {
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\training_filters\\v8\\train.csv": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\episodes\\v1\\search\\query.csv": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\episodes\\v1\\search\\gallery.csv": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\experiments\\runs\\vitl_wild_e2_segment01\\backbone.safetensors": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\episodes\\v1\\manifest.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\training_filters\\v8\\manifest.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\source_crop_cache_v8\\manifest.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\scripts\\source_crop_cache.py": "current_source_changed_after_training; exact_run_snapshot_verified"
+      }
+    },
+    {
+      "run": "vitl_wild_e2_segment01",
+      "source": {
+        "run_wild_pretrain.py": true,
+        "campaign_time.py": true,
+        "extension.py": true,
+        "monitor_resources.py": true,
+        "reid_model.py": true,
+        "run_experiment.py": true
+      },
+      "inputs": {
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_e2_v1\\run_wild_pretrain.py": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_e2_v1\\source\\reid_model.py": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_e2_v1\\source\\run_experiment.py": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_e2_v1\\source\\monitor_resources.py": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_e2_v1\\source\\campaign_time.py": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_e2_v1\\source\\extension.py": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\external_data\\veriwild\\train_inventory_v2\\image_inventory.csv": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\external_data\\veriwild\\train_inventory_v2\\receipt.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\foundation\\vit_large_patch16_dinov3.lvd1689m.safetensors": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\external_data\\veriwild\\train_inventory_v2\\training_provenance.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_e2_v1\\preregistration.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\experiments\\runs\\vitl_wild_e1_segment01\\config.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\experiments\\runs\\vitl_wild_e1_segment01\\resume.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\experiments\\runs\\vitl_wild_e1_segment01\\completion.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\experiments\\runs\\vitl_wild_e1_segment01\\backbone_export.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\experiments\\runs\\vitl_wild_e1_readiness01_retry\\config.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\experiments\\runs\\vitl_wild_e1_readiness02\\config.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_pretrain_v1\\preregistration.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_pretrain_v1\\run_wild_pretrain.py": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_e2_v1\\first-batches.json": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_pretrain_v1\\source\\reid_model.py": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_pretrain_v1\\source\\run_experiment.py": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_pretrain_v1\\source\\monitor_resources.py": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_pretrain_v1\\source\\campaign_time.py": true,
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_e2_plan_v1\\proposed_registration.json": "historical_path_missing",
+        "C:\\Users\\serge\\Data\\Projects\\LCT_2026\\artifacts\\vitl_wild_e2_v1\\parent-pins.json": true
+      }
+    }
+  ],
+  "external": {
+    "rows": 277797,
+    "identities": 30671,
+    "inventory_sha256": "39df62a4071d4686279288cd4d34cbd578428ef9f75bbe65875cce189520e573",
+    "exact_contest_overlaps": {
+      "file_sha256": 0,
+      "pixel_sha256": 0,
+      "external_RGB_vs_contest_crop": 0
+    },
+    "fresh_file_hash_mismatches": 0,
+    "mismatch_examples": [],
+    "official_mapping_mismatches": 0,
+    "decode_errors_in_original_full_audit": 0,
+    "namespaced": true
+  },
+  "artifacts": {
+    "checkpoint": {
+      "bytes": 3648845205,
+      "sha256": "1fb7d811ee5b987138b5ba223ea97d299628de9addfe83bfc205dc827a490696"
+    },
+    "onnx_playground": {
+      "bytes": 607325498,
+      "sha256": "ff7194b127f000436caac0e7be80e89192210396257b09f1f5127c25bfd73f71"
+    },
+    "onnx_submission": {
+      "bytes": 607325498,
+      "sha256": "ff7194b127f000436caac0e7be80e89192210396257b09f1f5127c25bfd73f71"
+    },
+    "evaluator_submission": {
+      "bytes": 17160,
+      "sha256": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3"
+    }
+  },
+  "highest_search_records": [
+    {
+      "path": "experiments\\eval\\vitl_tt_fit_e8_dba\\metrics.json",
+      "mAP@10": 0.9195635909402521,
+      "Q": 0.9588823325234294
+    },
+    {
+      "path": "experiments\\eval\\vitl_tt_fit_daynight_dba_k4_a2\\metrics.json",
+      "mAP@10": 0.913969967832094,
+      "Q": 0.9590769230769229
+    },
+    {
+      "path": "experiments\\eval\\vitl_multiview_rel_fit_e8_s20_dba_k4_a2\\metrics.json",
+      "mAP@10": 0.9127725702684176,
+      "Q": 0.9588823325234294
+    },
+    {
+      "path": "experiments\\eval\\inc_bf16_dba\\metrics.json",
+      "mAP@10": 0.9109262939671993,
+      "Q": 0.9658536585365853
+    },
+    {
+      "path": "experiments\\eval\\native_dba_k4a2\\metrics.json",
+      "mAP@10": 0.910658667536782,
+      "Q": 0.9658536585365853
+    },
+    {
+      "path": "experiments\\eval\\vitl_tt_fit_s320_e8_s20_dba_k4_a2\\metrics.json",
+      "mAP@10": 0.909001245847176,
+      "Q": 0.9613496932515337
+    },
+    {
+      "path": "experiments\\eval\\tt_soup_dba\\metrics.json",
+      "mAP@10": 0.9086497389653536,
+      "Q": 0.9567051942626374
+    },
+    {
+      "path": "experiments\\eval\\vitl_tt_fit_night30_dba_k4_a2\\metrics.json",
+      "mAP@10": 0.9061263710910721,
+      "Q": 0.9635051835247967
+    },
+    {
+      "path": "experiments\\eval\\vitl_tt_fit_cos_dba\\metrics.json",
+      "mAP@10": 0.9046534149835644,
+      "Q": 0.9588823325234294
+    },
+    {
+      "path": "experiments\\eval\\vitl_mix_fit_e8_dba_k4_a2\\metrics.json",
+      "mAP@10": 0.9045738741232927,
+      "Q": 0.9725075528700906
+    },
+    {
+      "path": "experiments\\eval\\vitl_nive_fit_e8_s20_dba_k4_a2\\metrics.json",
+      "mAP@10": 0.9043272260454569,
+      "Q": 0.967873555215151
+    },
+    {
+      "path": "experiments\\eval\\vitl_tt_fit_e8_s21_dba\\metrics.json",
+      "mAP@10": 0.9040691082634603,
+      "Q": 0.9610465116279069
+    },
+    {
+      "path": "experiments\\eval\\verify_tt_weights\\metrics.json",
+      "mAP@10": 0.9039451003269525,
+      "Q": 0.9590838618745594
+    },
+    {
+      "path": "experiments\\eval\\vitl_tt_fit_e8\\metrics.json",
+      "mAP@10": 0.9039451003269525,
+      "Q": 0.9590838618745594
+    },
+    {
+      "path": "experiments\\runs\\vitl_tt_fit_e8\\eval\\epoch0008-batch0000-step0002864\\metrics.json",
+      "mAP@10": 0.9039451003269525,
+      "Q": 0.9590838618745594
+    },
+    {
+      "path": "experiments\\eval\\vitl_cur1_fit_e8_dba_k4_a2\\metrics.json",
+      "mAP@10": 0.9037532134947002,
+      "Q": 0.9588823325234294
+    },
+    {
+      "path": "experiments\\eval\\vitl_tt_fitv9_e8_dba_k4_a2\\metrics.json",
+      "mAP@10": 0.903375207641196,
+      "Q": 0.9588823325234294
+    },
+    {
+      "path": "experiments\\eval\\vitl_attrpair_fit_e8_dba_k4_a2\\metrics.json",
+      "mAP@10": 0.9032228055951063,
+      "Q": 0.9610465116279069
+    },
+    {
+      "path": "experiments\\eval\\tt_soup\\metrics.json",
+      "mAP@10": 0.9027705432948373,
+      "Q": 0.9610465116279069
+    },
+    {
+      "path": "experiments\\eval\\vitl_tt_fitv9_plain_e8_dba_k4_a2\\metrics.json",
+      "mAP@10": 0.9022315660760428,
+      "Q": 0.9613012014332889
+    }
+  ],
+  "elapsed_seconds": 92.47241759998724,
+  "audit_script_sha256": "1e391ad9a32e2d21dc812c7567f0ddec5c7774031d83ac72b1f8a8022ce0a20e",
+  "status": "passed_with_documented_limitations"
+}

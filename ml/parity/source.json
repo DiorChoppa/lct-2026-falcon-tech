@@ -1,0 +1,13 @@
+{
+  "image_id": "e35f8a1e83ee4da3923d28a54c728868",
+  "bbox": [
+    904,
+    264,
+    516,
+    439
+  ],
+  "role": "FIT",
+  "reference": "FP32 PyTorch checkpoint, TF32 disabled",
+  "checkpoint_sha256": "26032a04664494ddf70e4cabf51b5a87b4ffee1ec90c637b29c2d661af6de772",
+  "onnx_sha256": "a1a63bcbfc00388ad6612a33c4861ffae8684a67bb3c0f1cb0d380b0b4bec1e0"
+}

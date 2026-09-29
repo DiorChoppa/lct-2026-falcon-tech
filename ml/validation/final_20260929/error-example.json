@@ -1,0 +1,20 @@
+{
+  "query": "0f818cbe500846df8f22ba88ee9aa77c",
+  "vehicle_id": "1258",
+  "valid_positives": [
+    "267d1159333147acaf518b5940d23d6c",
+    "cf2a78632e274d8f8423c87361515c27"
+  ],
+  "top10_after_junk": [
+    "bd0d9c44133240bc8552dc86c02da6b2",
+    "48950f2161a64e7180e638cea0369236",
+    "462305c1dd524a7fb1172cf0e58be202",
+    "e18f39c7c4df4812891ba4f07c24e48c",
+    "48491886eacb455b9cc329940c6b990c",
+    "68c16be76a214e5a8ae4e56b67f1a2ea",
+    "4c0076d780d24363b1cd8c63ac32c8ac",
+    "867f6e2dd68c43cc843adc243ade5195",
+    "267d1159333147acaf518b5940d23d6c"
+  ],
+  "correct_in_top10": 1
+}

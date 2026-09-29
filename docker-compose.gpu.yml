@@ -1,0 +1,20 @@
+# Переопределение для машины с NVIDIA GPU (nvidia-container-toolkit).
+services:
+  inference:
+    environment:
+      ORT_EXECUTION_PROVIDER: cuda
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+  tagger:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

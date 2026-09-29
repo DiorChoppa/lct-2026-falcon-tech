@@ -1,0 +1,1144 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ReID ТС без ГРЗ",
+    "description": "Сервис формирования цифрового признака транспортного средства: галерея, поиск по кропу, режим отказа, привязка ГРЗ, экспорт. Ошибки — всегда `{ error: { code, message } }`.",
+    "license": {
+      "name": "MIT",
+      "identifier": "MIT"
+    },
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/embed": {
+      "post": {
+        "tags": [
+          "service"
+        ],
+        "summary": "Эмбеддинг одного bbox: кадр + bbox → inference.Embed.",
+        "operationId": "embed",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/EmbedForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmbedResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "bbox вне кадра, нет изображения",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "inference недоступен",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/gallery": {
+      "get": {
+        "tags": [
+          "gallery"
+        ],
+        "summary": "Список галереи, новые записи первыми.",
+        "operationId": "list",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "С 1.",
+            "required": false,
+            "schema": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int32",
+              "minimum": 0
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "1..200, по умолчанию 20.",
+            "required": false,
+            "schema": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int32",
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GalleryPage"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "gallery"
+        ],
+        "summary": "Добавить ТС в галерею: кадр + bbox → gallery.Add (кроп, эмбеддинг, запись).",
+        "operationId": "create",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GalleryItem"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "bbox вне кадра, нет изображения",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "gallery или inference недоступен",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/gallery/import": {
+      "post": {
+        "tags": [
+          "gallery"
+        ],
+        "summary": "Массовый импорт кадров датасета по CSV: шлюз читает кадры с диска и шлёт\nпачки в gallery.Import. bbox обрезается по кадру (в разметке встречаются\nвыходы на 1–2 px). Битые кадры не прерывают импорт, недоступность gallery\nили inference — прерывает (уже импортированные записи остаются).",
+        "operationId": "import",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportReport"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "gallery или inference недоступен",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/gallery/{id}": {
+      "get": {
+        "tags": [
+          "gallery"
+        ],
+        "summary": "Одна запись галереи.",
+        "operationId": "get_one",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id записи",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GalleryItem"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/gallery/{id}/plate": {
+      "put": {
+        "tags": [
+          "gallery"
+        ],
+        "summary": "Привязать ГРЗ к записи (из ALPR другой камеры или вручную) либо снять его.",
+        "operationId": "set_plate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id записи",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlateBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GalleryItem"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "tags": [
+          "service"
+        ],
+        "summary": "Готовность: 200, когда gallery, search и inference отвечают на gRPC health; иначе 503.",
+        "operationId": "health",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/info": {
+      "get": {
+        "tags": [
+          "service"
+        ],
+        "summary": "Метаданные модели из сервиса inference (gRPC Info).",
+        "operationId": "info",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Info"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/search": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Найти ТС в галерее: кадр + bbox → search.Search → кандидаты с карточками из gallery.",
+        "operationId": "search",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "bbox вне кадра, нет изображения",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "search или inference недоступен",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/searches/{id}/compare/{gallery_id}": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Сверка пары: патч-токены query и кандидата из уже сохранённого поиска —\nсовпавшие области, local_score, теги кандидата. Требует модель с\nпатч-токенами (иначе search отвечает FailedPrecondition → 409).",
+        "operationId": "compare",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id поиска",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "gallery_id",
+            "in": "path",
+            "description": "id кандидата в галерее",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompareResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "поиск или запись галереи не найдены",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "модель без патч-токенов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "search недоступен",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/searches/{id}/export.csv": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "CSV поиска из search.Export: gallery_id,score,confidence,plate.",
+        "operationId": "export_csv",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id поиска",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "CSV, UTF-8",
+            "content": {
+              "text/csv": {}
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Bbox": {
+        "type": "object",
+        "required": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ],
+        "properties": {
+          "h": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "w": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "x": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "y": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        }
+      },
+      "Candidate": {
+        "type": "object",
+        "required": [
+          "item",
+          "score",
+          "confidence",
+          "accepted"
+        ],
+        "properties": {
+          "accepted": {
+            "type": "boolean",
+            "description": "Прошёл ли кандидат порог режима отказа."
+          },
+          "confidence": {
+            "type": "number",
+            "format": "float",
+            "description": "Уверенность, к которой search применяет `threshold`: `alpha*score +\n(1-alpha)*localScore`; при alpha = 1 равна score. Та же, что в export.csv."
+          },
+          "item": {
+            "$ref": "#/components/schemas/GalleryItem"
+          },
+          "localScore": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "float",
+            "description": "Счёт по патчам, если search его считал (alpha < 1 в model.json)."
+          },
+          "score": {
+            "type": "number",
+            "format": "float",
+            "description": "Косинусное сходство глобальных эмбеддингов, 0..1."
+          }
+        }
+      },
+      "CompareResponse": {
+        "type": "object",
+        "required": [
+          "matches",
+          "localScore",
+          "note",
+          "candidateTags"
+        ],
+        "properties": {
+          "candidateTags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "description": "Теги кандидата из tagger; у query тегов нет — это не запись галереи."
+          },
+          "localScore": {
+            "type": "number",
+            "format": "float",
+            "description": "Доля взаимно совпавших патчей с весом по сходству, 0..1."
+          },
+          "matches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatchMatch"
+            }
+          },
+          "note": {
+            "type": "string",
+            "description": "\"few_shared_views\", если ракурсы почти не пересекаются; иначе пусто."
+          }
+        }
+      },
+      "CreateForm": {
+        "type": "object",
+        "description": "Поля формы POST /api/gallery (multipart/form-data).",
+        "required": [
+          "image",
+          "bbox"
+        ],
+        "properties": {
+          "bbox": {
+            "type": "string",
+            "description": "JSON `{\"x\":..,\"y\":..,\"w\":..,\"h\":..}` в пикселях кадра."
+          },
+          "image": {
+            "type": "string",
+            "format": "binary",
+            "description": "Полный кадр JPEG/PNG, до 3 МиБ."
+          },
+          "image_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "plate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "vehicle_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "EmbedForm": {
+        "type": "object",
+        "description": "Поля формы POST /api/embed (multipart/form-data).",
+        "required": [
+          "image",
+          "bbox"
+        ],
+        "properties": {
+          "bbox": {
+            "type": "string",
+            "description": "JSON `{\"x\":..,\"y\":..,\"w\":..,\"h\":..}` в пикселях кадра."
+          },
+          "image": {
+            "type": "string",
+            "format": "binary",
+            "description": "Полный кадр JPEG/PNG, до 3 МиБ."
+          }
+        }
+      },
+      "EmbedResponse": {
+        "type": "object",
+        "required": [
+          "embedding",
+          "dim",
+          "inferenceUs"
+        ],
+        "properties": {
+          "dim": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "embedding": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            },
+            "description": "L2-нормированный вектор размерности dim."
+          },
+          "inferenceUs": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Чистое время инференса модели по данным inference, микросекунды."
+          }
+        }
+      },
+      "ErrorBody": {
+        "type": "object",
+        "description": "Тело ошибки для OpenAPI.",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorDetail"
+          }
+        }
+      },
+      "ErrorDetail": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Машиночитаемый код: VALIDATION_ERROR, NOT_FOUND, GALLERY_UNAVAILABLE,\nSEARCH_UNAVAILABLE, INFERENCE_UNAVAILABLE, UPSTREAM_PRECONDITION,\nUPSTREAM_ERROR"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "GalleryItem": {
+        "type": "object",
+        "required": [
+          "id",
+          "imageId",
+          "bbox",
+          "cropUrl",
+          "tags",
+          "createdAt"
+        ],
+        "properties": {
+          "bbox": {
+            "$ref": "#/components/schemas/Bbox"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cropUrl": {
+            "type": "string",
+            "description": "Кроп ТС: `/files/crops/...` через шлюз либо URL хранилища."
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "imageId": {
+            "type": "string",
+            "description": "Имя кадра без расширения (из датасета) или сгенерированный id."
+          },
+          "plate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "ГРЗ, привязанный оператором."
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            }
+          },
+          "vehicleId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "GalleryPage": {
+        "type": "object",
+        "required": [
+          "data",
+          "pagination"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GalleryItem"
+            }
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        }
+      },
+      "Health": {
+        "type": "object",
+        "required": [
+          "status",
+          "gallery",
+          "search",
+          "inference"
+        ],
+        "properties": {
+          "gallery": {
+            "type": "boolean"
+          },
+          "inference": {
+            "type": "boolean"
+          },
+          "search": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string",
+            "description": "\"ok\" или \"degraded\" (хотя бы один из gRPC-сервисов не отвечает SERVING)."
+          }
+        }
+      },
+      "ImportError": {
+        "type": "object",
+        "required": [
+          "imageId",
+          "message"
+        ],
+        "properties": {
+          "imageId": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ImportForm": {
+        "type": "object",
+        "description": "Поля формы POST /api/gallery/import.",
+        "required": [
+          "csv"
+        ],
+        "properties": {
+          "csv": {
+            "type": "string",
+            "format": "binary",
+            "description": "CSV в формате датасета: image_id,x,y,w,h[,vehicle_id,camera_id]."
+          },
+          "images_dir": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Каталог с кадрами `<image_id>.jpg` относительно DATASET_DIR сервиса. По умолчанию `images`."
+          }
+        }
+      },
+      "ImportReport": {
+        "type": "object",
+        "required": [
+          "imported",
+          "failed",
+          "errors"
+        ],
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportError"
+            }
+          },
+          "failed": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "imported": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "Info": {
+        "type": "object",
+        "required": [
+          "service"
+        ],
+        "properties": {
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "model": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ModelInfo",
+                "description": "Модель, загруженная сервисом inference; null, если он недоступен."
+              }
+            ]
+          },
+          "service": {
+            "type": "string"
+          }
+        }
+      },
+      "ModelInfo": {
+        "type": "object",
+        "required": [
+          "name",
+          "version",
+          "dim",
+          "inputHeight",
+          "inputWidth",
+          "executionProvider"
+        ],
+        "properties": {
+          "dim": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "executionProvider": {
+            "type": "string",
+            "description": "\"cpu\" | \"cuda\""
+          },
+          "inputHeight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "inputWidth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "required": [
+          "page",
+          "pageSize",
+          "totalItems",
+          "totalPages"
+        ],
+        "properties": {
+          "page": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        }
+      },
+      "PatchMatch": {
+        "type": "object",
+        "required": [
+          "queryRegion",
+          "candidateRegion",
+          "similarity"
+        ],
+        "properties": {
+          "candidateRegion": {
+            "$ref": "#/components/schemas/Bbox",
+            "description": "Область на кропе кандидата, в тех же координатах входа модели."
+          },
+          "queryRegion": {
+            "$ref": "#/components/schemas/Bbox",
+            "description": "Область на кропе запроса в координатах входа модели (inputWidth ×\ninputHeight из /api/info): кроп растягивается во вход целиком, так что\nв пиксели кропа — умножением на его ширину/высоту и делением на вход."
+          },
+          "similarity": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "PlateBody": {
+        "type": "object",
+        "properties": {
+          "plate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "ГРЗ; null — снять привязку."
+          }
+        }
+      },
+      "SearchForm": {
+        "type": "object",
+        "description": "Поля формы POST /api/search (multipart/form-data).",
+        "required": [
+          "image",
+          "bbox"
+        ],
+        "properties": {
+          "bbox": {
+            "type": "string",
+            "description": "JSON `{\"x\":..,\"y\":..,\"w\":..,\"h\":..}` в пикселях кадра."
+          },
+          "image": {
+            "type": "string",
+            "format": "binary",
+            "description": "Полный кадр JPEG/PNG, до 3 МиБ."
+          },
+          "top_n": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "Сколько кандидатов вернуть, 1..100, по умолчанию 10.",
+            "minimum": 0
+          }
+        }
+      },
+      "SearchResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "queryCropUrl",
+          "threshold",
+          "candidates"
+        ],
+        "properties": {
+          "candidates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Candidate"
+            },
+            "description": "Топ-N по убыванию уверенности, включая ниже порога. Ни одного accepted — отказ."
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "id поиска: экспорт — /api/searches/{id}/export.csv."
+          },
+          "queryCropUrl": {
+            "type": "string"
+          },
+          "threshold": {
+            "type": "number",
+            "format": "float",
+            "description": "Порог из models/model.json (тот же, что применяет search)."
+          }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "description": "Тег детали от tagger (через gallery.SetTags).",
+        "required": [
+          "key",
+          "confidence"
+        ],
+        "properties": {
+          "confidence": {
+            "type": "number",
+            "format": "float"
+          },
+          "key": {
+            "type": "string"
+          },
+          "region": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Bbox",
+                "description": "Область на кропе в пикселях кропа; null, если тег без локализации."
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "service",
+      "description": "Состояние сервиса и модели, прямой эмбеддинг для замера"
+    },
+    {
+      "name": "gallery",
+      "description": "Галерея ранее виденных ТС"
+    },
+    {
+      "name": "search",
+      "description": "Поиск по кропу, режим отказа, история и экспорт"
+    }
+  ]
+}

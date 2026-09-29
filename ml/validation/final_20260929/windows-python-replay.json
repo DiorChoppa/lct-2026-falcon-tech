@@ -1,0 +1,27 @@
+{
+  "status": "pass",
+  "scope": "Local Windows CUDA, PTX JIT disabled; not rebuilt Linux image",
+  "shape": [
+    300,
+    1024
+  ],
+  "dtype": "float32",
+  "repeat_arrays_bit_exact": true,
+  "repeat_npy_files_bit_exact": true,
+  "maximum_norm_error": 1.1920928955078125e-07,
+  "native_comparison_queries": 33,
+  "minimum_native_cosine": 0.9999968295362672,
+  "maximum_native_component_difference": 0.00032137148082256317,
+  "native_batch_size": 32,
+  "python_batch_size": 1,
+  "sha256": {
+    "artifacts\\final_submission_20260929\\staging\\ml\\extractor.py": "4ef6900920b2246e44a07e105f9f08023808272013740597e72e8aac2e9f9199",
+    "artifacts\\final_submission_20260929\\staging\\ml\\reid\\preprocess.py": "39749e6449ca1ce8708866bc3fb30552afe3734b5539f8f5e33195a9a68fd022",
+    "artifacts\\final_submission_20260929\\staging\\ml\\reid\\perf.py": "795f1ecbf60cd9fcdcea9f7ecd5c7361f151533e5c99eb4ef13bdd3ed72cdd06",
+    "artifacts\\final_submission_20260929\\staging\\models\\model.json": "daed979f5b62b203d368af9e5eef496e5f928b43cec17dd44411fa49833cd660",
+    "artifacts\\final_submission_20260929\\staging\\models\\model.onnx": "ff7194b127f000436caac0e7be80e89192210396257b09f1f5127c25bfd73f71",
+    "Data\\dataset\\test_query.csv": "97e1ed21942bae9c95b1ce2e5d339d9f635bf49fa484367e6b19349789bb9b4c",
+    "artifacts\\final_submission_20260929\\windows-native\\python-perf.npy": "d706e919a0cd6cf4c881e34acb4aebb84d3f8293d4a519168449b2956282e4dd",
+    "artifacts\\final_submission_20260929\\windows-native\\python-repeat.npy": "d706e919a0cd6cf4c881e34acb4aebb84d3f8293d4a519168449b2956282e4dd"
+  }
+}

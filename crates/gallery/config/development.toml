@@ -1,0 +1,21 @@
+[system]
+application_name = "gallery"
+
+[logger]
+format = "pretty"
+
+[grpc_server]
+host = "0.0.0.0"
+port = 50054
+
+[database]
+url = "postgres://reid:reid@localhost:5432/reid"
+
+[inference]
+url = "http://localhost:50051"
+
+[tagger]
+url = "http://localhost:50052"
+
+[storage]
+bucket_url = "file:///tmp/crops/gallery-crops"

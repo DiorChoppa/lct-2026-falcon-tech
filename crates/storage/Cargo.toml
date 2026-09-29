@@ -1,0 +1,23 @@
+[package]
+name = "storage"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+# Owner: Ivan (interim — put/get for gallery and search until crates/storage
+# owner per 02-plan.md, Kirill, adds presign and picks the S3 backend).
+
+[features]
+# MockObjectRepository, for downstream crates' (gallery, search) own tests.
+test-utils = []
+
+[dependencies]
+anyhow.workspace = true
+async-trait.workspace = true
+object_store.workspace = true
+url.workspace = true
+
+[dev-dependencies]
+tokio.workspace = true
+tempfile = "3"

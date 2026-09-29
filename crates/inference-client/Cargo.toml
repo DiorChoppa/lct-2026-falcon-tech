@@ -1,0 +1,20 @@
+[package]
+name = "inference-client"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+# Owner: Ivan. Thin gRPC client for inference.Embed/Info, shared by gallery
+# and search so neither depends on crates/inference (which pulls in ort).
+
+[features]
+# MockEmbeddingClient, for downstream crates' (gallery, search) own tests.
+test-utils = []
+
+[dependencies]
+common.workspace = true
+proto.workspace = true
+anyhow.workspace = true
+async-trait.workspace = true
+tonic.workspace = true

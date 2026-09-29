@@ -1,0 +1,78 @@
+{
+  "scope": "Frozen SEARCH only; exact packaged offline native CUDA pipeline; no training, tuning, calibration or jury-test labels",
+  "source_commit": "058c3489812a4ffc49e092bc59303f66a4ae7e6d",
+  "image_id": "sha256:1d90450c0514f23cb8d341b00f237e1c8df875864f1deebeb1ffcfee33bb8097",
+  "started_utc": "2026-09-24T21:55:32.490289+00:00",
+  "hardware": "RTX 3090; Docker Desktop Linux on Windows; 4 vCPU / 8 GiB container",
+  "network": "none",
+  "input_mounts": "read-only",
+  "batch_size": 32,
+  "query_rows": 215,
+  "gallery_rows": 750,
+  "embedding_shape": [
+    965,
+    1024
+  ],
+  "graph_sha256": "ff7194b127f000436caac0e7be80e89192210396257b09f1f5127c25bfd73f71",
+  "runtime_sha256": "b10825f4306b01a4951c528554f2495c4597080c63637b300669544d9c142e76",
+  "policy_sha256": "083b094326b11012567a6474cdbb80dfd3eb303a8b51f14df0c5e7f20e99fb38",
+  "ort_version": "1.24.4",
+  "startup_placement": {
+    "passed": true,
+    "cuda_events": 1509,
+    "allowed_cpu_metadata_events": 468,
+    "startup_batches": [
+      1
+    ],
+    "limitation": "Runtime startup placement profiles B1; real B32 and remainder shapes pass numerical full-episode comparison"
+  },
+  "embedding_min_cosine_to_qualified_reference": 0.9999999999999998,
+  "embedding_max_absolute_error": 0.0,
+  "embedding_max_norm_error": 8.344650268554688e-07,
+  "identical_top10_query_rows": 215,
+  "identical_accepted_query_gallery_pairs": true,
+  "metrics": {
+    "ranking": {
+      "n_scored": 172,
+      "n_openset_excluded": 43,
+      "mAP@10": 0.910658667536782,
+      "Rank-1": 0.9127906976744186,
+      "Rank-5": 0.9593023255813954
+    },
+    "candidates": {
+      "TP": 156,
+      "FP": 0,
+      "FN": 16,
+      "TN": 43,
+      "n_openset_queries": 43,
+      "Precision": 1.0,
+      "Recall": 0.9069767441860465,
+      "F1": 0.951219512195122,
+      "TNR": 1.0,
+      "PR-AUC": 0.9894240309615938
+    }
+  },
+  "Q": 0.9658536585365853,
+  "wall_seconds_including_startup_io_and_output": 12.235000000044238,
+  "timing_note": "One cold process launch, not a controlled cold-storage or warm extractor benchmark; do not infer A5000 performance",
+  "resources_sampled_every_seconds": 3,
+  "peak_sampled_gpu_temperature_c": 50.0,
+  "minimum_sampled_free_ram_gib": 11.417289733886719,
+  "minimum_sampled_free_disk_gib": 305.74554443359375,
+  "input_sha256": {
+    "gallery.csv": "7a494d2dd6f7a919ff3e4cb4f76d2b6d1cecbbe4a8b3df5bb32c3a8da2f647cb",
+    "ground_truth.csv": "0c05fd803248b41b93fdcf9fdc4107e068bc6439ce4044e1f6f1353eaad002c9",
+    "query.csv": "d1bf5a07886f2491c5538ae4e2701de8af573748b9c73de3becf2d6f8f1b084b"
+  },
+  "evaluator_sha256": "655c71db8c2e4d2cd7680c40c768afacfdffff360401111c1a46df921551ffa3",
+  "output_sha256": {
+    "embeddings.npy": "caad56c7ab4ce26fed5f5da8b9c40f62cecd8642b0c20b5bba36dbed78f18012",
+    "submission.csv": "f04bf46c253743d53f84054dd973e0e6c262ada5b67b379aa3363bae23d36c16",
+    "candidates.csv": "0a95e0dacf79d40dbdc25410d448e025dbf3f8b8c7a89957256b201b20e8a4dc"
+  },
+  "limitations": [
+    "No jury A5000 measurement",
+    "Sealed calibration/audit remain unopened",
+    "GitLab CI/deployment status not independently accessible"
+  ]
+}

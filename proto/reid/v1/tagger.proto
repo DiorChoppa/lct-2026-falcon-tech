@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package reid.v1;
+
+// Сервис тегов деталей: zero-shot теги по кропу, без доступа к БД/S3.
+// Асинхронная пара: gallery вызывает Enqueue и не ждёт ответа; tagger сам
+// вызывает gallery.SetTags, когда теги готовы (04-architecture.md §6).
+service Tagger {
+  rpc Enqueue(EnqueueRequest) returns (EnqueueResponse);
+}
+
+message EnqueueRequest {
+  int64 item_id = 1;
+  // Уже вырезанный кроп ТС, JPEG/PNG.
+  bytes crop = 2;
+}
+
+// Пустой ответ: постановка в очередь, не результат. Успех = принято в
+// обработку; готовые теги придут отдельным вызовом gallery.SetTags.
+message EnqueueResponse {}
+
+message Region {
+  int32 x = 1;
+  int32 y = 2;
+  int32 w = 3;
+  int32 h = 4;
+}
+
+message Tag {
+  // Ключ из tagger/vocab.yaml, например "roof_box", "sticker", "damage".
+  string key = 1;
+  float confidence = 2;
+  // Область на кропе в пикселях кропа; отсутствует, если тег без локализации.
+  optional Region region = 3;
+}

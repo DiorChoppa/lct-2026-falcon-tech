@@ -1,0 +1,23 @@
+{
+  "_comment": "Stage 2: contest FIT-v8 (5,722 crops, 928 ids), 2+2 camera sampler, fresh 928-class head. 8 x 358 = 2,864 updates. Same flags as ledger run vitl_fit_2plus2_v1_e8.",
+  "model": "vit_large_patch16_dinov3.lvd1689m",
+  "global_pool": "token",
+  "image_size": 256,
+  "resize_mode": "stretch",
+  "neck": "bn",
+  "triplet_space": "post_bn",
+  "epochs": 8,
+  "batch_size": 16,
+  "samples_per_id": 4,
+  "lr": 3e-05,
+  "head_lr": 0.0003,
+  "weight_decay": 0.05,
+  "triplet_weight": 1.0,
+  "margin": 0.3,
+  "label_smoothing": 0.1,
+  "warmup_steps": 50,
+  "seed": 20260920,
+  "workers": 2,
+  "amp": "bf16",
+  "identity_sampler": "fit_2plus2_v1"
+}

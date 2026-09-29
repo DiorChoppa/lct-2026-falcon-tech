@@ -1,0 +1,14 @@
+.git
+dataset
+data
+target
+**/.venv
+**/__pycache__
+**/.ruff_cache
+**/node_modules
+ml/runs
+submission
+*.pptx
+*.pdf
+**/target
+ml/.venv*

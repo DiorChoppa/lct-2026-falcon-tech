@@ -1,0 +1,61 @@
+{
+  "workspace-final-tests": {
+    "passed": 148,
+    "failed": 0,
+    "ignored": 1,
+    "log_sha256": "ce5c5542e8fa2f1096f4f143c692147dd814a5a81f264328e3f95b0077be244c"
+  },
+  "service-parity-final": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "log_sha256": "56ead52afd1905de35be2af6689c01c529c1fe3c57fe73be56f6988d6651244a"
+  },
+  "native-test": {
+    "passed": 28,
+    "failed": 0,
+    "ignored": 2,
+    "log_sha256": "1e83010f6553914ef62032dbe3ff3696e5b794f04859d6bc943d4be940abceb2"
+  },
+  "offline-tests": {
+    "passed": 13,
+    "failed": 0,
+    "ignored": 0,
+    "log_sha256": "446f65018a16634fafca53fb3f113cb419e7540507d0190b03302f7e113697b6"
+  },
+  "python": {
+    "passed": 48,
+    "failed": 0,
+    "skipped": 0,
+    "previous_release_passed": 47,
+    "scope": "Full suite after calibration-tool review; Ruff passed",
+    "evidence": "code-quality-review.json"
+  },
+  "web": {
+    "passed": 81,
+    "failed": 0,
+    "production_build": "passed"
+  },
+  "lint": {
+    "python_ruff": "passed",
+    "rust_fmt": "passed",
+    "rust_clippy_warnings_denied": "passed"
+  },
+  "browser": {
+    "scope": "Local production preview, mock API; final model info, metrics, calibration charts",
+    "runtime_errors": 0,
+    "note": "Does not establish public demo/backend availability."
+  },
+  "presentation": {
+    "slides": 15,
+    "visual_review": "passed after mapping correction",
+    "package_errors": 0,
+    "layout_errors": 0,
+    "inherited_decorative_warnings": 11
+  },
+  "tagger": {
+    "passed": 8,
+    "failed": 0,
+    "ruff": "passed"
+  }
+}
